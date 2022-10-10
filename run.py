@@ -1,7 +1,11 @@
 import cv2 as cv
+import numpy as np
 from settings import Settings
-
+from vision import Vision
+from windowcapture import get_screenshot
+import time
 
 config = Settings()
 
-print(config.temp_names)
+test = cv.imshow('test',get_screenshot(config.monitor))
+time.sleep(5)
