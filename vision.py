@@ -1,3 +1,4 @@
+from distutils.log import debug
 import cv2 as cv
 import numpy as np
 import time
@@ -25,11 +26,11 @@ class Vision:
         self.method = method
 
     def record_screen(self, image):
-        cv.namedWindow("Matches", cv.WINDOW_NORMAL)
+        # cv.namedWindow("Matches", cv.WINDOW_NORMAL)
         cv.imshow("Matches", image)
         return None
 
-    def find(self, haystack_img, threshold=0.5):
+    def find(self, haystack_img, debug_mode = False, threshold=0.7):
         # run the OpenCV algorithm
         result = cv.matchTemplate(haystack_img, self.needle_img, self.method)
 
@@ -53,7 +54,23 @@ class Vision:
             rectangles, groupThreshold=1, eps=0.5
         )
         # Record screen and show it
-        self.record_screen(haystack_img)
-        time.sleep(20)
         for (x, y, w, h) in rectangles:
-            return x, y
+            if debug_mode:
+                points =[]
+                line_type = cv.LINE_4
+                line_color = (0, 255, 0)
+                # Determine the center position
+                center_x = x + int(w/2)
+                center_y = y + int(h/2)
+                # Save the points
+                points.append((center_x, center_y))
+                top_left = (x, y)
+                bottom_right = (x + w, y + h)
+                cv.rectangle(haystack_img, top_left, bottom_right, color=line_color, 
+                             lineType=line_type, thickness=2)
+        if debug_mode:
+            # Show the screen
+            cv.imshow('test', haystack_img)
+        for (x, y, w, h) in rectangles:
+            return x,y
+

@@ -5,12 +5,9 @@ import cv2 as cv
 
 def get_screenshot(monitor):
     with mss.mss() as sct:
-        # Part of the screen to capture
-        while "Screen capturing":
-            # Get raw pixels from the screen, save it to a Numpy array
-            img = np.array(sct.grab(monitor))
-            img = cv.cvtColor(img, cv.COLOR_RGB2BGR)
-            return img
+        # Get raw pixels from the screen, save it to a Numpy array
+        img = np.array(sct.grab(monitor))
+        return img
 
 
 def convert_tuple2dict(tuple):

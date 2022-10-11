@@ -1,11 +1,18 @@
 import cv2 as cv
 import numpy as np
 from settings import Settings
-from vision import Vision
+from analize import login_position
+
 from windowcapture import get_screenshot
-import time
+
 
 config = Settings()
+monitor = {"top": 0, "left": 0, "width": 600, "height": 600,}
 
-test = cv.imshow('test',get_screenshot(config.monitor))
-time.sleep(5)
+
+while True:
+    x = login_position()
+
+    if cv.waitKey(1) == ord("q"):
+        cv.destroyAllWindows()
+        break
