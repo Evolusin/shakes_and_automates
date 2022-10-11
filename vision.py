@@ -70,7 +70,8 @@ class Vision:
                              lineType=line_type, thickness=2)
         if debug_mode:
             # Show the screen
+            haystack_img = cv.resize(haystack_img, (960, 540))
             cv.imshow('test', haystack_img)
         for (x, y, w, h) in rectangles:
-            return x,y
+            return x,y,w,h
 
