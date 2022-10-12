@@ -14,3 +14,4 @@ class Settings:
             self.karczma_questnpc2_y = self.height/1.35
             self.karczma_quest_x = self.width/1.66
             self.karczma_quest_y = self.height/1.44
+            self.misja_koniec = f'{self.img_dir}misja_koniec.png'
