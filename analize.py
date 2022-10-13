@@ -24,6 +24,7 @@ def needle_position(img_needle):
         points = (x,y)
         return points
 
+
 def click_point(x,y):
     x = int(x)
     y = int(y)
