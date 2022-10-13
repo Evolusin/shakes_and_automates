@@ -1,5 +1,3 @@
-# We import the necessary packages
-#import the needed packages
 import cv2 as cv
 import os
 import pytesseract
@@ -9,7 +7,6 @@ from settings import Settings
 config = Settings()
 
 image = cv.imread(config.misja_koniec)
-
 #convert to grayscale image
 gray=cv.cvtColor(image, cv.COLOR_BGR2GRAY)
 	
