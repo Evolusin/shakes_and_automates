@@ -11,8 +11,11 @@ class Settings:
         # templates
         self.login_needle = f"{self.img_dir}login.png"
         self.karczma_needle = f"{self.img_dir}karczma.png"
+        self.karczma_check = f"{self.img_dir}karczma_check.png"
         self.quest_check = f"{self.img_dir}na_misji.png"
         self.misja_koniec = f"{self.img_dir}misja_koniec.png"
+        self.lvl_up = f"{self.img_dir}nowy_poziom.png"
+        self.lvl_up_continue = f"{self.img_dir}nowy_poziom_continue.png"
         self.logowanie_codzienne = f"{self.img_dir}odbierz.png"
 
         # static positions for mouse click

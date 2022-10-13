@@ -14,8 +14,9 @@ state = "logowanie"
 print("Launched")
 
 while True:
-    # DEBUG MOUSE POS
-    # print(pyautogui.position()) 
+    if state == "mouse_pos":
+        print(pyautogui.position()) 
+
     if state == "logowanie":
         login_position = needle_position(config.login_needle)
         if login_position:
@@ -39,16 +40,27 @@ while True:
             print("Wykryłem skończoną misję")
             x, y = finish_quest
             click_point(x, y)
+            lvl_up = needle_position(config.lvl_up)
+            if lvl_up:
+                lvl_up_continue = needle_position(config.lvl_up_continue)
+                x, y = lvl_up_continue
+                click_point(x, y)
+                state = "do_karczmy"
         else:
             print("Nie wykryto misji")
             state = "do_karczmy"
 
     elif state == "do_karczmy":
+        karczma_check = needle_position(config.karczma_check)
         karczma_position = needle_position(config.karczma_needle)
-        if karczma_position:
-            x,y = karczma_position
-            click_point(x,y)
+        print(karczma_check)
+        if karczma_check:
             state = "karczma"
+        else:
+            if karczma_position:
+                x,y = karczma_position
+                click_point(x,y)
+                state = "karczma"
 
     elif state == "karczma":
         print("Jestem w karczmie. Przechodzę do klikania npc od questów")
