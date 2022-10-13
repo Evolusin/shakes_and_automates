@@ -31,7 +31,7 @@ def click_point(x,y):
     pyautogui.moveTo(x,y)
     time.sleep(0.5)
     pyautogui.click(x,y,button='left')
-    print(f"Clicked at {x} - {y}")
+    print(f"Klikam na {x} - {y}")
     time.sleep(2)
 
 def needle_text(img_needle):
