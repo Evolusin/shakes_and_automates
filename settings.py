@@ -31,4 +31,10 @@ class Settings:
         # mission confirm
         self.karczma_quest_x = self.width / 1.66
         self.karczma_quest_y = self.height / 1.44
-        
+        # quest time expected position and lenght
+        self.quest_time_top_left_x = int(self.width / 1.453)
+        self.quest_time_top_left_y = int(self.height / 1.655)
+        self.quest_time_w = int((self.width / 1.363) - self.quest_time_top_left_x)
+        self.quest_time_h = int((self.height / 1.563) - self.quest_time_top_left_y)
+
+

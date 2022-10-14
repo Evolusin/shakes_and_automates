@@ -34,17 +34,28 @@ def click_point(x,y):
     print(f"Klikam na {x} - {y}")
     time.sleep(2)
 
+def get_needle_and_text(top,left,width,height):
+    """
+    Get's needle position and screenshots then returns text
+    readed from it
+    """
+    img_needle_position = {"top":top, "left":left,
+    "width":width, "height":height}
+    screen = get_screenshot(img_needle_position)
+    cv.imshow('test',screen)
+    text = needle_text(screen)
+    return text
+
 def needle_text(img_needle):
     """
     Returns text readed from image
     """
-    image = cv.imread(img_needle)
     #convert to grayscale image
-    gray=cv.cvtColor(image, cv.COLOR_BGR2GRAY)
+    gray=cv.cvtColor(img_needle, cv.COLOR_BGR2GRAY)
     #memory usage with image i.e. adding image to memory
     filename = "{}.jpg".format(os.getpid())
     cv.imwrite(filename, gray)
     text = pytesseract.image_to_string(Image.open(filename))
     os.remove(filename)
-    print(f"Text from image {img_needle} - {text}")
+    print(f"Text from image - {text}")
     return text
