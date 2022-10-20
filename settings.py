@@ -7,7 +7,7 @@ class Settings:
         self.img_dir = "img/"
         self.width, self.height = pyautogui.size()
         self.monitor = {"top": 0, "left": 0, "width": self.width, "height": self.height}
-        self.state = "debug"
+        self.state = "logowanie"
 
         # templates
         self.login_needle = f"{self.img_dir}login.png"

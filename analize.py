@@ -52,7 +52,8 @@ def needle_text(img_needle):
     """
     #convert to grayscale image
     gray=cv.cvtColor(img_needle, cv.COLOR_BGR2GRAY)
-    cv.imshow('test',gray)
+    if config.state == 'debug':
+        cv.imshow('test',gray)
     #memory usage with image i.e. adding image to memory
     filename = "temp/{}.jpg".format('temporary')
     cv.imwrite(filename, gray)
