@@ -1,6 +1,7 @@
 import numpy as np
 import mss
 import cv2 as cv
+from PIL import ImageGrab
 
 
 def get_screenshot(monitor):
@@ -9,6 +10,9 @@ def get_screenshot(monitor):
         img = np.array(sct.grab(monitor))
         return img
 
+def get_screenshot_grab(x, y, w, h):
+    img = np.array(ImageGrab.grab(bbox=(x,y,w,h)))
+    return img
 
 def convert_tuple2dict(tuple):
     left = int(tuple[0])

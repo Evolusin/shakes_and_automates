@@ -7,6 +7,7 @@ class Settings:
         self.img_dir = "img/"
         self.width, self.height = pyautogui.size()
         self.monitor = {"top": 0, "left": 0, "width": self.width, "height": self.height}
+        self.state = "debug"
 
         # templates
         self.login_needle = f"{self.img_dir}login.png"
@@ -32,9 +33,9 @@ class Settings:
         self.karczma_quest_x = self.width / 1.66
         self.karczma_quest_y = self.height / 1.44
         # quest time expected position and lenght
-        self.quest_time_top_left_x = int(self.width / 1.453)
+        self.quest_time_top_left_x = int(self.width / 1.515)
         self.quest_time_top_left_y = int(self.height / 1.655)
-        self.quest_time_w = int((self.width / 1.363) - self.quest_time_top_left_x)
-        self.quest_time_h = int((self.height / 1.563) - self.quest_time_top_left_y)
+        self.quest_time_w = int(self.width / 1.444)
+        self.quest_time_h = int(self.height / 1.574)
 
 

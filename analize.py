@@ -1,6 +1,6 @@
 from vision import Vision
 from settings import Settings
-from windowcapture import get_screenshot
+from windowcapture import get_screenshot, get_screenshot_grab
 from PIL import Image
 import cv2 as cv
 import pytesseract
@@ -41,7 +41,7 @@ def get_needle_and_text(top,left,width,height):
     """
     img_needle_position = {"top":top, "left":left,
     "width":width, "height":height}
-    screen = get_screenshot(img_needle_position)
+    screen = get_screenshot_grab(top,left,width,height)
     cv.imshow('test',screen)
     text = needle_text(screen)
     return text
@@ -52,8 +52,9 @@ def needle_text(img_needle):
     """
     #convert to grayscale image
     gray=cv.cvtColor(img_needle, cv.COLOR_BGR2GRAY)
+    cv.imshow('test',gray)
     #memory usage with image i.e. adding image to memory
-    filename = "{}.jpg".format(os.getpid())
+    filename = "temp/{}.jpg".format('temporary')
     cv.imwrite(filename, gray)
     text = pytesseract.image_to_string(Image.open(filename))
     os.remove(filename)
