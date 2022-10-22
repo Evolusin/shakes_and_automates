@@ -5,7 +5,7 @@
 <h1>
 <p align="center">
   <img src="https://raw.githubusercontent.com/Evolusin/shakes_bot/main/project/Shakes_gif.gif" alt="Logo" width="694" height="132">
-  <br />Shakes & Automates
+  <br />
 </h1>
 <p align="center">
     Python bot for Shakes&Fidget based on computer vision
