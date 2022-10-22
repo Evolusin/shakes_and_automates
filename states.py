@@ -14,6 +14,7 @@ config = Settings()
 
 
 class States:
+
     def s_debug(self):
         """Enters debug mode in infinte loop
 
@@ -127,6 +128,60 @@ class States:
                     config.karczma_questnpc3["y"],
                 )
         print("Akceptuję misję")
-        click_point(config.karczma_quest["x"], config.karczma_quest["y"])
+        # click_point(config.karczma_quest["x"], config.karczma_quest["y"])
+        self.get_quests_info()
         print("Misja zaakceptowana. Wychodzę z programu")
         return "exit"
+
+    def get_quests_info(self):
+        quest1time = get_needle_and_text(
+            config.quest_time_top_left["x"],
+            config.quest_time_top_left["y"],
+            config.quest_time_w,
+            config.quest_time_h, 
+        )
+        quest1gold = get_needle_and_text(
+            config.quest_gold_top_left["x"],
+            config.quest_gold_top_left["y"],
+            config.quest_gold_w,
+            config.quest_gold_h, debug=False
+        )
+        click_point(config.quest2_pos["x"],config.quest2_pos["y"])
+        quest2time = get_needle_and_text(
+            config.quest_time_top_left["x"],
+            config.quest_time_top_left["y"],
+            config.quest_time_w,
+            config.quest_time_h,
+        )
+        quest2gold = get_needle_and_text(
+            config.quest_gold_top_left["y"],
+            config.quest_gold_top_left["y"],
+            config.quest_gold_w,
+            config.quest_gold_h
+        )
+        click_point(config.quest3_pos["x"], config.quest3_pos["y"])
+        quest3time = get_needle_and_text(
+            config.quest_time_top_left["x"],
+            config.quest_time_top_left["y"],
+            config.quest_time_w,
+            config.quest_time_h,
+        )
+        quest3gold = get_needle_and_text(
+            config.quest_gold_top_left["y"],
+            config.quest_gold_top_left["y"],
+            config.quest_gold_w,
+            config.quest_gold_h
+        )
+        questes_time_str = [quest1time,quest2time,quest3time]
+        questes_gold_str =[quest1gold,quest2gold,quest3gold]
+        questes_time = []
+        questes_gold = []
+        for obj in questes_time_str:
+            value=sum(x * int(t) for x, t in zip([60, 1], obj.split(":"))) 
+            questes_time.append(value)
+        for obj in questes_gold_str:
+            obj = str(obj)
+            value = obj.replace(',','.')
+            questes_gold.append(value)
+        print(questes_time)
+        print(questes_gold)

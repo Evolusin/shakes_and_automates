@@ -49,7 +49,7 @@ def click_point(x,y):
     print(f"Klikam na {x} - {y}")
     time.sleep(1)
 
-def get_needle_and_text(top,left,width,height):
+def get_needle_and_text(top,left,width,height, debug=False):
     """
     Get's needle position and screenshots then returns text
     readed from it
@@ -58,10 +58,13 @@ def get_needle_and_text(top,left,width,height):
     "width":width, "height":height}
     screen = get_screenshot_grab(top,left,width,height)
     cv.imshow('test',screen)
-    text = needle_text(screen)
+    if debug:
+        print("here")
+        time.sleep(5)
+    text = needle_text(screen, debug=debug)
     return text
 
-def needle_text(img_needle):
+def needle_text(img_needle, debug=False):
     """
     Returns text readed from image
     """
@@ -74,5 +77,6 @@ def needle_text(img_needle):
     cv.imwrite(filename, gray)
     text = pytesseract.image_to_string(Image.open(filename))
     os.remove(filename)
-    print(f"Text from image - {text}")
+    if debug:
+        print(f"Text from image - {text}")
     return text
