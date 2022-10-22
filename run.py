@@ -19,8 +19,10 @@ while True:
 
     elif config.state == "debug":
         get_needle_and_text(
-            config.quest_time_top_left_x, config.quest_time_top_left_y,
-            config.quest_time_w, config.quest_time_h
+            config.quest_time_top_left_x,
+            config.quest_time_top_left_y,
+            config.quest_time_w,
+            config.quest_time_h,
         )
 
     elif config.state == "logowanie":
