@@ -1,7 +1,7 @@
 from calendar import c
 import cv2 as cv
 from settings import Settings
-from analize import needle_position, click_point, get_needle_and_text
+from analize import needle_position, click_point, get_needle_and_text, needle_position_once
 import time
 import pyautogui
 
@@ -18,13 +18,15 @@ while True:
         print(pyautogui.position())
 
     elif config.state == "debug":
-        get_needle_and_text(
-            config.quest_time_top_left_x,
-            config.quest_time_top_left_y,
-            config.quest_time_w,
-            config.quest_time_h,
-        )
-
+        # get_needle_and_text(
+        #     config.quest_time_top_left_x,
+        #     config.quest_time_top_left_y,
+        #     config.quest_time_w,
+        #     config.quest_time_h,
+        # )
+        print(config.karczma_questnpc1['x'])
+        print(config.karczma_questnpc1['y'])
+        
     elif config.state == "logowanie":
         login_position = needle_position(config.login_needle)
         if login_position:
@@ -73,11 +75,15 @@ while True:
 
     elif config.state == "karczma":
         print("Jestem w karczmie. Przechodzę do klikania npc od questów")
-        click_point(config.karczma_questnpc1_x, config.karczma_questnpc1_y)
-        click_point(config.karczma_questnpc2_x, config.karczma_questnpc2_y)
-        click_point(config.karczma_questnpc3_x, config.karczma_questnpc3_y)
+        click_point(config.karczma_questnpc1['x'], config.karczma_questnpc1['y'])
+        karczma_quest_accept = needle_position_once(config.karczma_quest_accept)
+        if not karczma_quest_accept:
+            click_point(config.karczma_questnpc2['x'], config.karczma_questnpc2['y'])
+            karczma_quest_accept = needle_position_once(config.karczma_quest_accept)
+            if not karczma_quest_accept:
+                click_point(config.karczma_questnpc3['x'], config.karczma_questnpc3['y'])
         print("Akceptuję misję")
-        click_point(config.karczma_quest_x, config.karczma_quest_y)
+        click_point(config.karczma_quest['x'], config.karczma_quest['y'])
         print("Misja zaakceptowana. Wychodzę z programu")
         break
 

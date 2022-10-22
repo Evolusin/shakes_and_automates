@@ -12,7 +12,7 @@ config = Settings()
 
 def needle_position(img_needle):
     """
-    Anlizes screen and returns img_needle position if found
+    Anlizes screen and returns img_needle position
     """
     login_vision = Vision(img_needle)
     screen = get_screenshot(config.monitor)
@@ -24,6 +24,21 @@ def needle_position(img_needle):
         points = (x,y)
         return points
 
+def needle_position_once(img_needle):
+    """
+    Anlizes screen once and returns img_needle position if found
+    """
+    login_vision = Vision(img_needle)
+    screen = get_screenshot(config.monitor)
+    points = login_vision.find(screen, debug_mode=True)
+    if points:
+        x,y,w,h = points
+        x = x+(w/2)
+        y = y+(h/2)
+        points = (x,y)
+        return points
+    else:
+        return None
 
 def click_point(x,y):
     x = int(x)
