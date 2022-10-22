@@ -47,7 +47,7 @@ def click_point(x,y):
     time.sleep(0.5)
     pyautogui.click(x,y,button='left')
     print(f"Klikam na {x} - {y}")
-    time.sleep(2)
+    time.sleep(1)
 
 def get_needle_and_text(top,left,width,height):
     """

@@ -28,7 +28,7 @@ while True:
         print(config.karczma_questnpc1['y'])
         
     elif config.state == "logowanie":
-        login_position = needle_position(config.login_needle)
+        login_position = needle_position_once(config.login_needle)
         if login_position:
             x, y = login_position
             click_point(x, y)
@@ -38,11 +38,14 @@ while True:
                 click_point(x, y)
             print("Przechodzę do quest_check")
             config.state = "quest_check"
+        else:
+            print("Jesteś już zalogowany. Przechodzę do quest_check")
+            config.state = "quest_check"
 
     elif config.state == "quest_check":
         print("Sprawdzam czy na misji")
-        quest_check = needle_position(config.quest_check)
-        finish_quest = needle_position(config.misja_koniec)
+        quest_check = needle_position_once(config.quest_check)
+        finish_quest = needle_position_once(config.misja_koniec)
         if quest_check:
             print("Postać jest na misji")
             break
