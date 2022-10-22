@@ -25,7 +25,11 @@
 ## About The Project
 
 Shakes & Automates is Python a bot designed to automatically play the Shakes & Fidget browser game by using only Computer Vision. The bot is currently in early alpha
-<br/>
+<br/><br/>
+<p align="center">
+  
+![screenshot](project/Animation.gif)
+</p>        
 <br/><br/>
 
 ## Usage
