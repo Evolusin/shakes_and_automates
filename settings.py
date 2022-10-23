@@ -40,7 +40,8 @@ class Settings:
         # quest gold expected position and lenght
         self.quest_gold_right_down = {x:950,y:687}
         self.quest_gold_top_left = {x:885,y:655}
-        #quest 2 and 3 button position
+        #quests 1/2/3 button position
+        self.quest1_pos = {x:922,y:400}
         self.quest2_pos = {x:1097,y:386}
         self.quest3_pos = {x:1397,y:403}
 

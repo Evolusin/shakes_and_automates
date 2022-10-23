@@ -40,13 +40,14 @@ def needle_position_once(img_needle):
     else:
         return None
 
-def click_point(x,y):
+def click_point(x,y, debug=False):
     x = int(x)
     y = int(y)
     pyautogui.moveTo(x,y)
     time.sleep(0.5)
     pyautogui.click(x,y,button='left')
-    print(f"Klikam na {x} - {y}")
+    if debug:
+        print(f"Klikam na {x} - {y}")
     time.sleep(1)
 
 def get_needle_and_text(top,left,width,height, debug=False):
