@@ -14,7 +14,6 @@ config = Settings()
 
 
 class States:
-
     def s_debug(self):
         """Enters debug mode in infinte loop
 
@@ -102,7 +101,7 @@ class States:
                 return "karczma"
 
     def karczma(self):
-        """Clickes in order on NPC localistions. If NPC is found then 
+        """Clickes in order on NPC localistions. If NPC is found then
         accepts quest and returns exit state
 
         Returns:
@@ -140,7 +139,9 @@ class States:
         full_eq_check = needle_position_once(config.full_eq)
         if full_eq_check:
             print("Wykryłem pełen ekwipunek! Wychodzę z programu")
-            click_point(config.full_eq_cancel_pos["x"],config.full_eq_cancel_pos["y"])
+            click_point(
+                config.full_eq_cancel_pos["x"], config.full_eq_cancel_pos["y"]
+            )
             return "exit"
         print("Misja zaakceptowana. Wychodzę z programu")
         return "exit"
@@ -150,22 +151,22 @@ class States:
             config.quest_time_top_left["x"],
             config.quest_time_top_left["y"],
             config.quest_time_right_down["x"],
-            config.quest_time_right_down["y"]
+            config.quest_time_right_down["y"],
         )
         q1gold = get_needle_and_text(
             config.quest_gold_top_left["x"],
             config.quest_gold_top_left["y"],
             config.quest_gold_right_down["x"],
-            config.quest_gold_right_down["y"]
+            config.quest_gold_right_down["y"],
         )
-        if q1gold == '':
+        if q1gold == "":
             q1gold = get_needle_and_text(
-                config.quest_gold_top_left["x"]-5,
-                config.quest_gold_top_left["y"]+5,
-                config.quest_gold_right_down["x"]+5,
-                config.quest_gold_right_down["y"]+5
-                )
-        click_point(config.quest2_pos["x"],config.quest2_pos["y"])
+                config.quest_gold_top_left["x"] - 5,
+                config.quest_gold_top_left["y"] + 5,
+                config.quest_gold_right_down["x"] + 5,
+                config.quest_gold_right_down["y"] + 5,
+            )
+        click_point(config.quest2_pos["x"], config.quest2_pos["y"])
 
         q2time = get_needle_and_text(
             config.quest_time_top_left["x"],
@@ -177,15 +178,15 @@ class States:
             config.quest_gold_top_left["x"],
             config.quest_gold_top_left["y"],
             config.quest_gold_right_down["x"],
-            config.quest_gold_right_down["y"]
+            config.quest_gold_right_down["y"],
         )
-        if q2gold =='':
+        if q2gold == "":
             q2gold = get_needle_and_text(
-            config.quest_gold_top_left["x"]-5,
-            config.quest_gold_top_left["y"]+5,
-            config.quest_gold_right_down["x"]+5,
-            config.quest_gold_right_down["y"]+5
-        )
+                config.quest_gold_top_left["x"] - 5,
+                config.quest_gold_top_left["y"] + 5,
+                config.quest_gold_right_down["x"] + 5,
+                config.quest_gold_right_down["y"] + 5,
+            )
         click_point(config.quest3_pos["x"], config.quest3_pos["y"])
         q3time = get_needle_and_text(
             config.quest_time_top_left["x"],
@@ -197,39 +198,46 @@ class States:
             config.quest_gold_top_left["x"],
             config.quest_gold_top_left["y"],
             config.quest_gold_right_down["x"],
-            config.quest_gold_right_down["y"]
+            config.quest_gold_right_down["y"],
         )
-        if q3gold == '':
+        if q3gold == "":
             q3gold = get_needle_and_text(
-            config.quest_gold_top_left["x"]-5,
-            config.quest_gold_top_left["y"]+5,
-            config.quest_gold_right_down["x"]+5,
-            config.quest_gold_right_down["y"]+5
-        )
-        return q1time,q1gold,q2time,q2gold,q3time,q3gold
+                config.quest_gold_top_left["x"] - 5,
+                config.quest_gold_top_left["y"] + 5,
+                config.quest_gold_right_down["x"] + 5,
+                config.quest_gold_right_down["y"] + 5,
+            )
+        return q1time, q1gold, q2time, q2gold, q3time, q3gold
 
-    def get_quests_info(self, debug = False):
-        q1time,q1gold,q2time,q2gold,q3time,q3gold = self.values_from_quests()
-        questes_time_str = [q1time,q2time,q3time]
-        questes_gold_str =[q1gold,q2gold,q3gold]
+    def get_quests_info(self, debug=False):
+        (
+            q1time,
+            q1gold,
+            q2time,
+            q2gold,
+            q3time,
+            q3gold,
+        ) = self.values_from_quests()
+        questes_time_str = [q1time, q2time, q3time]
+        questes_gold_str = [q1gold, q2gold, q3gold]
         if debug:
             print(f"Gold misji przed wyczyszczeniem: {questes_gold_str}")
         questes_time = []
         questes_gold = []
-        questes_ratio = {1:None,2:None,3:None}
+        questes_ratio = {1: None, 2: None, 3: None}
 
         i = 1
         for obj in questes_time_str:
-            value=sum(x * int(t) for x, t in zip([60, 1], obj.split(":"))) 
+            value = sum(x * int(t) for x, t in zip([60, 1], obj.split(":")))
             questes_time.append(value)
         for obj in questes_gold_str:
             obj = str(obj)
-            value = obj.replace(',','.')
-            value = value.replace('\n','')
+            value = obj.replace(",", ".")
+            value = value.replace("\n", "")
             questes_gold.append(float(value))
-        for qtime, gold in zip(questes_time,questes_gold):
-            questes_ratio[i]=(round(float(qtime / gold),2))
-            i=i+1
+        for qtime, gold in zip(questes_time, questes_gold):
+            questes_ratio[i] = round(float(qtime / gold), 2)
+            i = i + 1
         print(f"Opłacalność misji {questes_ratio}")
         best_quest = min(questes_ratio, key=questes_ratio.get)
         return best_quest
