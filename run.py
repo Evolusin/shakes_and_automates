@@ -22,12 +22,6 @@ while True:
         faze = states.s_mouse_pos
 
     elif faze == "debug":
-        # get_needle_and_text(
-        #     config.quest_time_top_left_x,
-        #     config.quest_time_top_left_y,
-        #     config.quest_time_w,
-        #     config.quest_time_h,
-        # )
         print(config.karczma_questnpc1['x'])
         print(config.karczma_questnpc1['y'])
         
