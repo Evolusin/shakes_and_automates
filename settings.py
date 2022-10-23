@@ -9,6 +9,9 @@ class Settings:
         self.monitor = {"top": 0, "left": 0, "width": self.width, "height": self.height}
         self.state = "logowanie"
         self.quest_mode = "gold"
+        # for mac it's 1.7778 / Full HD - 1
+        # https://www.omnicalculator.com/other/resolution-scale
+        self.scale = 1
 
         # templates
         self.login_needle = f"{self.img_dir}login.png"
