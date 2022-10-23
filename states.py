@@ -2,6 +2,7 @@ from calendar import c
 import cv2 as cv
 from settings import Settings
 from analize import (
+    click_point_right,
     needle_position,
     click_point,
     get_needle_and_text,
@@ -138,11 +139,9 @@ class States:
         click_point(config.karczma_quest["x"], config.karczma_quest["y"])
         full_eq_check = needle_position_once(config.full_eq)
         if full_eq_check:
-            print("Wykryłem pełen ekwipunek! Wychodzę z programu")
-            click_point(
-                config.full_eq_cancel_pos["x"], config.full_eq_cancel_pos["y"]
-            )
-            return "exit"
+            print("Wykryłem pełen ekwipunek!")
+            click_point(config.full_eq_cancel_pos["x"], config.full_eq_cancel_pos["y"])
+            return "eq_sell"
         print("Misja zaakceptowana. Wychodzę z programu")
         return "exit"
 
@@ -241,3 +240,31 @@ class States:
         print(f"Opłacalność misji {questes_ratio}")
         best_quest = min(questes_ratio, key=questes_ratio.get)
         return best_quest
+
+    def eq_sell(self):
+        print("Przechodzę do ekwipunku")
+        click_point(config.character_menu["x"], config.character_menu["y"])
+        print("Zaczynam sprzedawać przedmioty")
+        item_list = [
+            config.item1_pos,
+            config.item2_pos,
+            config.item3_pos,
+            config.item4_pos,
+            config.item5_pos
+        ]
+        item_sell_list = [
+            config.item1_sell_pos,
+            config.item2_sell_pos,
+            config.item3_sell_pos,
+            config.item4_sell_pos,
+            config.item5_sell_pos
+        ]
+        for key, value in zip(item_list,item_sell_list):
+            click_point_right(key["x"], key["y"])
+            # clickicking two times to confirm sell
+            click_point(value["x"], value["y"])
+            click_point(value["x"], value["y"])
+
+        print("Sprzedałem wszystkie itemy")
+        print("Przecohdzę do karczmy")
+        return "do_karczmy"

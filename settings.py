@@ -47,5 +47,18 @@ class Settings:
         self.quest3_pos = {x:1397,y:403}
         # full eq cancel button position
         self.full_eq_cancel_pos = {x:1243,y:700}
+        # character menu
+        self.character_menu = {x:175, y:148}
+        # items in backpack
+        self.item1_pos = {x:1220, y:165}
+        self.item1_sell_pos = {x:1220, y:265}
+        self.item2_pos = {x:1343, y:165}
+        self.item2_sell_pos = {x:1343, y:265}
+        self.item3_pos = {x:1470, y:165}
+        self.item3_sell_pos = {x:1470, y:265}
+        self.item4_pos = {x:1600, y:165}
+        self.item4_sell_pos = {x:1600, y:265}
+        self.item5_pos = {x:1730, y:165}
+        self.item5_sell_pos = {x:1730, y:265}
 
 
