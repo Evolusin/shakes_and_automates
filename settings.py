@@ -20,7 +20,7 @@ class Settings:
         self.lvl_up = f"{self.img_dir}nowy_poziom.png"
         self.lvl_up_continue = f"{self.img_dir}nowy_poziom_continue.png"
         self.logowanie_codzienne = f"{self.img_dir}odbierz.png"
-
+        self.full_eq = f"{self.img_dir}full_eq.png"
         # variable for x/y positions
         x = "x"
         y = "y"
@@ -44,5 +44,7 @@ class Settings:
         self.quest1_pos = {x:922,y:400}
         self.quest2_pos = {x:1097,y:386}
         self.quest3_pos = {x:1397,y:403}
+        # full eq cancel button position
+        self.full_eq_cancel_pos = {x:1243,y:700}
 
 

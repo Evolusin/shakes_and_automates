@@ -137,6 +137,11 @@ class States:
         else:
             click_point(config.quest3_pos["x"], config.quest3_pos["y"])
         click_point(config.karczma_quest["x"], config.karczma_quest["y"])
+        full_eq_check = needle_position_once(config.full_eq)
+        if full_eq_check:
+            print("Wykryłem pełen ekwipunek! Wychodzę z programu")
+            click_point(config.full_eq_cancel_pos["x"],config.full_eq_cancel_pos["y"])
+            return "exit"
         print("Misja zaakceptowana. Wychodzę z programu")
         return "exit"
 
@@ -203,11 +208,12 @@ class States:
         )
         return q1time,q1gold,q2time,q2gold,q3time,q3gold
 
-    def get_quests_info(self):
+    def get_quests_info(self, debug = False):
         q1time,q1gold,q2time,q2gold,q3time,q3gold = self.values_from_quests()
         questes_time_str = [q1time,q2time,q3time]
         questes_gold_str =[q1gold,q2gold,q3gold]
-        print(f"Gold misji: {questes_gold_str}")
+        if debug:
+            print(f"Gold misji przed wyczyszczeniem: {questes_gold_str}")
         questes_time = []
         questes_gold = []
         questes_ratio = {1:None,2:None,3:None}
