@@ -21,6 +21,7 @@ class Settings:
         self.lvl_up_continue = f"{self.img_dir}nowy_poziom_continue.png"
         self.logowanie_codzienne = f"{self.img_dir}odbierz.png"
         self.full_eq = f"{self.img_dir}full_eq.png"
+        self.character_menu = f"{self.img_dir}character_menu.png"
         # variable for x/y positions
         x = "x"
         y = "y"

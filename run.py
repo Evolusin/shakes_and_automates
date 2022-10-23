@@ -39,6 +39,9 @@ while True:
 
     elif faze == "karczma":
         faze = states.karczma()
+    
+    elif faze == "eq_sell":
+        None
 
     if cv.waitKey(1) == ord("q"):
         cv.destroyAllWindows()
