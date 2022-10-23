@@ -43,6 +43,9 @@ while True:
     elif faze == "eq_sell":
         faze = states.eq_sell()
 
+    elif faze == "energry_status":
+        faze = states.energry_status()
+
     if cv.waitKey(1) == ord("q"):
         cv.destroyAllWindows()
         break

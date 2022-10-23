@@ -68,11 +68,10 @@ def get_needle_and_text(top,left,width,height, debug=False):
     """
     screen = get_screenshot_grab(top,left,width,height)
     if debug:
-        time.sleep(1)
-        cv.imshow('test',screen)
+        # time.sleep(1)
+        # cv.imshow('test',screen)
         print("start")
-        time.sleep(10)
-    text = needle_text(screen)
+    text = needle_text(screen,debug=debug)
     return text
 
 def needle_text(img_needle, debug=False):
@@ -84,9 +83,6 @@ def needle_text(img_needle, debug=False):
     #memory usage with image i.e. adding image to memory
     filename = "temp/{}.jpg".format('temporary')
     cv.imwrite(filename, gray)
-    if debug:
-        cv.imshow('test',gray)
-        time.sleep(2)
     text = pytesseract.image_to_string(Image.open(filename))
     os.remove(filename)
     if debug:

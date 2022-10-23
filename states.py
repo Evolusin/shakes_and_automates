@@ -108,6 +108,7 @@ class States:
         Returns:
             string: next state
         """
+        energy = self.energry_status()
         print("Jestem w karczmie. Przechodzę do klikania npc od questów")
         click_point(
             config.karczma_questnpc1["x"], config.karczma_questnpc1["y"]
@@ -128,7 +129,7 @@ class States:
                     config.karczma_questnpc3["y"],
                 )
         # click_point(config.karczma_quest["x"], config.karczma_quest["y"])
-        best_quest = self.get_quests_info()
+        best_quest = self.get_quests_info(debug=True)
         print(f"Akceptuję misję nr: {best_quest}")
         if best_quest == 1:
             click_point(config.quest1_pos["x"], config.quest1_pos["y"])
@@ -140,7 +141,9 @@ class States:
         full_eq_check = needle_position_once(config.full_eq)
         if full_eq_check:
             print("Wykryłem pełen ekwipunek!")
-            click_point(config.full_eq_cancel_pos["x"], config.full_eq_cancel_pos["y"])
+            click_point(
+                config.full_eq_cancel_pos["x"], config.full_eq_cancel_pos["y"]
+            )
             return "eq_sell"
         print("Misja zaakceptowana. Wychodzę z programu")
         return "exit"
@@ -152,6 +155,16 @@ class States:
             config.quest_time_right_down["x"],
             config.quest_time_right_down["y"],
         )
+        if q1time == "":
+            q1time = get_needle_and_text(
+                config.quest_time_top_left["x"] - 5,
+                config.quest_time_top_left["y"] + 5,
+                config.quest_time_right_down["x"] + 5,
+                config.quest_time_right_down["y"] + 5,
+            )
+            if q1time == "":
+                print("Nie mogłem znaleść czasu dla 1 misji. Pomijam quest")
+                q1time = "100000"
         q1gold = get_needle_and_text(
             config.quest_gold_top_left["x"],
             config.quest_gold_top_left["y"],
@@ -165,6 +178,9 @@ class States:
                 config.quest_gold_right_down["x"] + 5,
                 config.quest_gold_right_down["y"] + 5,
             )
+            if q1gold == "":
+                print("Nie mogłem znaleść golda dla 1 misji. Pomijam quest")
+                q1gold = "0"
         click_point(config.quest2_pos["x"], config.quest2_pos["y"])
 
         q2time = get_needle_and_text(
@@ -173,6 +189,16 @@ class States:
             config.quest_time_right_down["x"],
             config.quest_time_right_down["y"],
         )
+        if q2time == "":
+            q2time = get_needle_and_text(
+                config.quest_time_top_left["x"] - 5,
+                config.quest_time_top_left["y"] + 5,
+                config.quest_time_right_down["x"] + 5,
+                config.quest_time_right_down["y"] + 5,
+            )
+            if q2time == "":
+                print("Nie mogłem znaleść czasu dla 2 misji. Pomijam quest")
+                q2time = "100000"
         q2gold = get_needle_and_text(
             config.quest_gold_top_left["x"],
             config.quest_gold_top_left["y"],
@@ -186,6 +212,9 @@ class States:
                 config.quest_gold_right_down["x"] + 5,
                 config.quest_gold_right_down["y"] + 5,
             )
+            if q2gold == "":
+                print("Nie mogłem znaleść golda dla 2 misji. Pomijam quest")
+                q2gold = "0"
         click_point(config.quest3_pos["x"], config.quest3_pos["y"])
         q3time = get_needle_and_text(
             config.quest_time_top_left["x"],
@@ -193,6 +222,16 @@ class States:
             config.quest_time_right_down["x"],
             config.quest_time_right_down["y"],
         )
+        if q3time == "":
+            q3time = get_needle_and_text(
+                config.quest_time_top_left["x"] - 5,
+                config.quest_time_top_left["y"] + 5,
+                config.quest_time_right_down["x"] + 5,
+                config.quest_time_right_down["y"] + 5,
+            )
+            if q3time == "":
+                print("Nie mogłem znaleść czasu dla 3 misji. Pomijam quest")
+                q3time = "100000"
         q3gold = get_needle_and_text(
             config.quest_gold_top_left["x"],
             config.quest_gold_top_left["y"],
@@ -206,6 +245,9 @@ class States:
                 config.quest_gold_right_down["x"] + 5,
                 config.quest_gold_right_down["y"] + 5,
             )
+            if q3gold == "":
+                print("Nie mogłem znaleść golda dla 3 misji. Pomijam quest")
+                q3gold = "0"
         return q1time, q1gold, q2time, q2gold, q3time, q3gold
 
     def get_quests_info(self, debug=False):
@@ -221,6 +263,7 @@ class States:
         questes_gold_str = [q1gold, q2gold, q3gold]
         if debug:
             print(f"Gold misji przed wyczyszczeniem: {questes_gold_str}")
+            print(f"Czas misji przed wyczyszczeniem: {questes_time_str}")
         questes_time = []
         questes_gold = []
         questes_ratio = {1: None, 2: None, 3: None}
@@ -250,16 +293,16 @@ class States:
             config.item2_pos,
             config.item3_pos,
             config.item4_pos,
-            config.item5_pos
+            config.item5_pos,
         ]
         item_sell_list = [
             config.item1_sell_pos,
             config.item2_sell_pos,
             config.item3_sell_pos,
             config.item4_sell_pos,
-            config.item5_sell_pos
+            config.item5_sell_pos,
         ]
-        for key, value in zip(item_list,item_sell_list):
+        for key, value in zip(item_list, item_sell_list):
             click_point_right(key["x"], key["y"])
             # clickicking two times to confirm sell
             click_point(value["x"], value["y"])
@@ -268,3 +311,30 @@ class States:
         print("Sprzedałem wszystkie itemy")
         print("Przecohdzę do karczmy")
         return "do_karczmy"
+
+    def energry_status(self):
+        energy_left = get_needle_and_text(
+            config.energy_top_left["x"],
+            config.energy_top_left["y"],
+            config.quest_time_right_down["x"],
+            config.energy_bottom_right["y"],
+            debug=False,
+        )
+        if energy_left == "":
+            energy_left = get_needle_and_text(
+                config.energy_top_left["x"] - 3,
+                config.energy_top_left["y"] + 3,
+                config.quest_time_right_down["x"] + 3,
+                config.energy_bottom_right["y"] + 3,
+                debug=False,
+            )
+            if energy_left == "":
+                print("Nie udało mi się odczytać pozostałej energi")
+                return "exit"
+        if energy_left[0] == ";":
+            energy_left = energy_left[1:]
+        energy_left = energy_left.replace(";", ".")
+        energy_left = energy_left.replace(",", ".")
+        energy_left = energy_left.replace(")", "")
+        print(f"Pozostała energia - {energy_left}")
+        return "exit"
