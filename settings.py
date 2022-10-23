@@ -21,7 +21,7 @@ class Settings:
         self.lvl_up_continue = f"{self.img_dir}nowy_poziom_continue.png"
         self.logowanie_codzienne = f"{self.img_dir}odbierz.png"
 
-        #variable for x/y
+        # variable for x/y positions
         x = "x"
         y = "y"
 
@@ -35,12 +35,10 @@ class Settings:
         # mission confirm
         self.karczma_quest = {x:self.width / 1.66,y:self.height / 1.44}
         # quest time expected position and lenght
-        self.quest_time_w = int(self.width / 1.444)
-        self.quest_time_h = int(self.height / 1.574)
+        self.quest_time_right_down = {x:int(self.width / 1.444),y:int(self.height / 1.574)}
         self.quest_time_top_left = {x:int(self.width / 1.515), y:int(self.height / 1.655)}
         # quest gold expected position and lenght
-        self.quest_gold_w = 950
-        self.quest_gold_h = 687
+        self.quest_gold_right_down = {x:950,y:687}
         self.quest_gold_top_left = {x:885,y:655}
         #quest 2 and 3 button position
         self.quest2_pos = {x:1097,y:386}

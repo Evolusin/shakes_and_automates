@@ -54,14 +54,13 @@ def get_needle_and_text(top,left,width,height, debug=False):
     Get's needle position and screenshots then returns text
     readed from it
     """
-    img_needle_position = {"top":top, "left":left,
-    "width":width, "height":height}
     screen = get_screenshot_grab(top,left,width,height)
-    cv.imshow('test',screen)
     if debug:
-        print("here")
-        time.sleep(5)
-    text = needle_text(screen, debug=debug)
+        time.sleep(1)
+        cv.imshow('test',screen)
+        print("start")
+        time.sleep(10)
+    text = needle_text(screen)
     return text
 
 def needle_text(img_needle, debug=False):
@@ -70,11 +69,12 @@ def needle_text(img_needle, debug=False):
     """
     #convert to grayscale image
     gray=cv.cvtColor(img_needle, cv.COLOR_BGR2GRAY)
-    if config.state == 'debug':
-        cv.imshow('test',gray)
     #memory usage with image i.e. adding image to memory
     filename = "temp/{}.jpg".format('temporary')
     cv.imwrite(filename, gray)
+    if debug:
+        cv.imshow('test',gray)
+        time.sleep(2)
     text = pytesseract.image_to_string(Image.open(filename))
     os.remove(filename)
     if debug:

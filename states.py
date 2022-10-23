@@ -137,40 +137,40 @@ class States:
         quest1time = get_needle_and_text(
             config.quest_time_top_left["x"],
             config.quest_time_top_left["y"],
-            config.quest_time_w,
-            config.quest_time_h, 
+            config.quest_time_right_down["x"],
+            config.quest_time_right_down["y"]
         )
         quest1gold = get_needle_and_text(
             config.quest_gold_top_left["x"],
             config.quest_gold_top_left["y"],
-            config.quest_gold_w,
-            config.quest_gold_h, debug=False
+            config.quest_gold_right_down["x"],
+            config.quest_gold_right_down["y"]
         )
         click_point(config.quest2_pos["x"],config.quest2_pos["y"])
         quest2time = get_needle_and_text(
             config.quest_time_top_left["x"],
             config.quest_time_top_left["y"],
-            config.quest_time_w,
-            config.quest_time_h,
+            config.quest_time_right_down["x"],
+            config.quest_time_right_down["y"],
         )
         quest2gold = get_needle_and_text(
+            config.quest_gold_top_left["x"],
             config.quest_gold_top_left["y"],
-            config.quest_gold_top_left["y"],
-            config.quest_gold_w,
-            config.quest_gold_h
+            config.quest_gold_right_down["x"],
+            config.quest_gold_right_down["y"]
         )
         click_point(config.quest3_pos["x"], config.quest3_pos["y"])
         quest3time = get_needle_and_text(
             config.quest_time_top_left["x"],
             config.quest_time_top_left["y"],
-            config.quest_time_w,
-            config.quest_time_h,
+            config.quest_time_right_down["x"],
+            config.quest_time_right_down["y"],
         )
         quest3gold = get_needle_and_text(
+            config.quest_gold_top_left["x"],
             config.quest_gold_top_left["y"],
-            config.quest_gold_top_left["y"],
-            config.quest_gold_w,
-            config.quest_gold_h
+            config.quest_gold_right_down["x"],
+            config.quest_gold_right_down["y"]
         )
         questes_time_str = [quest1time,quest2time,quest3time]
         questes_gold_str =[quest1gold,quest2gold,quest3gold]
@@ -182,6 +182,7 @@ class States:
         for obj in questes_gold_str:
             obj = str(obj)
             value = obj.replace(',','.')
-            questes_gold.append(value)
+            value = value.replace('\n','')
+            questes_gold.append(float(value))
         print(questes_time)
         print(questes_gold)
