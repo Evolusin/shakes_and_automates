@@ -153,7 +153,15 @@ class States:
             config.quest_gold_right_down["x"],
             config.quest_gold_right_down["y"]
         )
+        if q1gold == '':
+            q1gold = get_needle_and_text(
+                config.quest_gold_top_left["x"]-5,
+                config.quest_gold_top_left["y"]+5,
+                config.quest_gold_right_down["x"]+5,
+                config.quest_gold_right_down["y"]+5
+                )
         click_point(config.quest2_pos["x"],config.quest2_pos["y"])
+
         q2time = get_needle_and_text(
             config.quest_time_top_left["x"],
             config.quest_time_top_left["y"],
@@ -165,6 +173,13 @@ class States:
             config.quest_gold_top_left["y"],
             config.quest_gold_right_down["x"],
             config.quest_gold_right_down["y"]
+        )
+        if q2gold =='':
+            q2gold = get_needle_and_text(
+            config.quest_gold_top_left["x"]-5,
+            config.quest_gold_top_left["y"]+5,
+            config.quest_gold_right_down["x"]+5,
+            config.quest_gold_right_down["y"]+5
         )
         click_point(config.quest3_pos["x"], config.quest3_pos["y"])
         q3time = get_needle_and_text(
@@ -179,12 +194,20 @@ class States:
             config.quest_gold_right_down["x"],
             config.quest_gold_right_down["y"]
         )
+        if q3gold == '':
+            q3gold = get_needle_and_text(
+            config.quest_gold_top_left["x"]-5,
+            config.quest_gold_top_left["y"]+5,
+            config.quest_gold_right_down["x"]+5,
+            config.quest_gold_right_down["y"]+5
+        )
         return q1time,q1gold,q2time,q2gold,q3time,q3gold
 
     def get_quests_info(self):
-        
+        q1time,q1gold,q2time,q2gold,q3time,q3gold = self.values_from_quests()
         questes_time_str = [q1time,q2time,q3time]
         questes_gold_str =[q1gold,q2gold,q3gold]
+        print(f"Gold misji: {questes_gold_str}")
         questes_time = []
         questes_gold = []
         questes_ratio = {1:None,2:None,3:None}
@@ -201,5 +224,6 @@ class States:
         for qtime, gold in zip(questes_time,questes_gold):
             questes_ratio[i]=(round(float(qtime / gold),2))
             i=i+1
+        print(f"Opłacalność misji {questes_ratio}")
         best_quest = min(questes_ratio, key=questes_ratio.get)
         return best_quest
