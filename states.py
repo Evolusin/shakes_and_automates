@@ -323,7 +323,7 @@ class States:
         if energy_left == "":
             energy_left = get_needle_and_text(
                 config.energy_top_left["x"] - 3,
-                config.energy_top_left["y"] + 3,
+                config.energy_top_left["y"] - 3,
                 config.quest_time_right_down["x"] + 3,
                 config.energy_bottom_right["y"] + 3,
                 debug=False,
