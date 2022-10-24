@@ -158,7 +158,7 @@ class States:
         if q1time == "":
             q1time = get_needle_and_text(
                 config.quest_time_top_left["x"] - 5,
-                config.quest_time_top_left["y"] + 5,
+                config.quest_time_top_left["y"] - 5,
                 config.quest_time_right_down["x"] + 5,
                 config.quest_time_right_down["y"] + 5,
             )
@@ -174,7 +174,7 @@ class States:
         if q1gold == "":
             q1gold = get_needle_and_text(
                 config.quest_gold_top_left["x"] - 5,
-                config.quest_gold_top_left["y"] + 5,
+                config.quest_gold_top_left["y"] - 5,
                 config.quest_gold_right_down["x"] + 5,
                 config.quest_gold_right_down["y"] + 5,
             )
@@ -192,7 +192,7 @@ class States:
         if q2time == "":
             q2time = get_needle_and_text(
                 config.quest_time_top_left["x"] - 5,
-                config.quest_time_top_left["y"] + 5,
+                config.quest_time_top_left["y"] - 5,
                 config.quest_time_right_down["x"] + 5,
                 config.quest_time_right_down["y"] + 5,
             )
@@ -208,7 +208,7 @@ class States:
         if q2gold == "":
             q2gold = get_needle_and_text(
                 config.quest_gold_top_left["x"] - 5,
-                config.quest_gold_top_left["y"] + 5,
+                config.quest_gold_top_left["y"] - 5,
                 config.quest_gold_right_down["x"] + 5,
                 config.quest_gold_right_down["y"] + 5,
             )
@@ -225,7 +225,7 @@ class States:
         if q3time == "":
             q3time = get_needle_and_text(
                 config.quest_time_top_left["x"] - 5,
-                config.quest_time_top_left["y"] + 5,
+                config.quest_time_top_left["y"] - 5,
                 config.quest_time_right_down["x"] + 5,
                 config.quest_time_right_down["y"] + 5,
             )
@@ -241,7 +241,7 @@ class States:
         if q3gold == "":
             q3gold = get_needle_and_text(
                 config.quest_gold_top_left["x"] - 5,
-                config.quest_gold_top_left["y"] + 5,
+                config.quest_gold_top_left["y"] - 5,
                 config.quest_gold_right_down["x"] + 5,
                 config.quest_gold_right_down["y"] + 5,
             )
