@@ -7,6 +7,7 @@ from analize import (
     click_point,
     get_needle_and_text,
     needle_position_once,
+    refresh_site,
 )
 import time
 import pyautogui
@@ -128,13 +129,13 @@ class States:
                     config.karczma_questnpc3["y"],
                 )
         mount = needle_position_once(config.quest_no_mount, config.quest_no_mount_sphere)
-        print(mount)
         if mount:
             print("Brak mounta!")
             buy_mount = self.buy_mount()
             return buy_mount
-        best_quest = self.get_quests_info(debug=True)
+        best_quest, best_quest_time= self.get_quests_info(debug=True)
         print(f"Akceptuję misję nr: {best_quest}")
+        print(f"Czas jej wykonania - {best_quest_time} sekund")
         if best_quest == 1:
             click_point(config.quest1_pos["x"], config.quest1_pos["y"])
         elif best_quest == 2:
@@ -149,8 +150,15 @@ class States:
                 config.full_eq_cancel_pos["x"], config.full_eq_cancel_pos["y"]
             )
             return "eq_sell"
-        print("Misja zaakceptowana. Wychodzę z programu")
-        return "exit"
+        print("Misja zaakceptowana. Przechodzę w tryb uśpienia")
+        self.mission_sleep(best_quest_time)
+        return "logowanie"
+
+    def mission_sleep(self, sleeptime):
+        print(f"Usypiam na {sleeptime} sekund")
+        time.sleep(sleeptime+10)
+        refresh_site()
+
 
     def buy_mount(self):
         mount = config.mount
@@ -301,7 +309,8 @@ class States:
             i = i + 1
         print(f"Opłacalność misji {questes_ratio}")
         best_quest = min(questes_ratio, key=questes_ratio.get)
-        return best_quest
+        best_quest_time = questes_time[best_quest-1]
+        return best_quest, best_quest_time
 
     def eq_sell(self):
         print("Przechodzę do ekwipunku")

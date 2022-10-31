@@ -50,6 +50,10 @@ def click_point(x,y, debug=False):
         print(f"Klikam na {x} - {y}")
     time.sleep(1)
 
+def refresh_site():
+    pyautogui.hotkey('ctrl', 'r')
+    time.sleep(3)
+
 def click_point_right(x,y, debug=False):
     x = int(x)
     y = int(y)
