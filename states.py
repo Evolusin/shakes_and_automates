@@ -180,7 +180,7 @@ class States:
             )
             if q1gold == "":
                 print("Nie mogłem znaleść golda dla 1 misji. Pomijam quest")
-                q1gold = "0"
+                q1gold = "1"
         click_point(config.quest2_pos["x"], config.quest2_pos["y"])
 
         q2time = get_needle_and_text(
@@ -214,7 +214,7 @@ class States:
             )
             if q2gold == "":
                 print("Nie mogłem znaleść golda dla 2 misji. Pomijam quest")
-                q2gold = "0"
+                q2gold = "1"
         click_point(config.quest3_pos["x"], config.quest3_pos["y"])
         q3time = get_needle_and_text(
             config.quest_time_top_left["x"],
@@ -247,7 +247,7 @@ class States:
             )
             if q3gold == "":
                 print("Nie mogłem znaleść golda dla 3 misji. Pomijam quest")
-                q3gold = "0"
+                q3gold = "1"
         return q1time, q1gold, q2time, q2gold, q3time, q3gold
 
     def get_quests_info(self, debug=False):
