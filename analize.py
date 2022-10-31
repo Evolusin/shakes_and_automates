@@ -24,12 +24,12 @@ def needle_position(img_needle):
         points = (x,y)
         return points
 
-def needle_position_once(img_needle):
+def needle_position_once(img_needle, sphere = config.monitor):
     """
     Anlizes screen once and returns img_needle position if found
     """
     login_vision = Vision(img_needle)
-    screen = get_screenshot(config.monitor)
+    screen = get_screenshot(sphere)
     points = login_vision.find(screen, debug_mode=True)
     if points:
         x,y,w,h = points

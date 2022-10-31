@@ -108,7 +108,6 @@ class States:
         Returns:
             string: next state
         """
-        energy = self.energry_status()
         print("Jestem w karczmie. Przechodzę do klikania npc od questów")
         click_point(
             config.karczma_questnpc1["x"], config.karczma_questnpc1["y"]
@@ -128,7 +127,12 @@ class States:
                     config.karczma_questnpc3["x"],
                     config.karczma_questnpc3["y"],
                 )
-        # click_point(config.karczma_quest["x"], config.karczma_quest["y"])
+        mount = needle_position_once(config.quest_no_mount, config.quest_no_mount_sphere)
+        print(mount)
+        if mount:
+            print("Brak mounta!")
+            buy_mount = self.buy_mount()
+            return buy_mount
         best_quest = self.get_quests_info(debug=True)
         print(f"Akceptuję misję nr: {best_quest}")
         if best_quest == 1:
@@ -147,6 +151,21 @@ class States:
             return "eq_sell"
         print("Misja zaakceptowana. Wychodzę z programu")
         return "exit"
+
+    def buy_mount(self):
+        mount = config.mount
+        print(f"Przechodzę do kupywania - {mount}")
+        click_point(config.stables["x"], config.stables["y"])
+        # TODO - Check gold before buying
+        if mount == 'wolf':
+            click_point(config.stables_wolf["x"], config.stables_wolf["y"])
+        elif mount == 'raptor':
+            click_point(config.stables_raptor["x"], config.stables_raptor["y"])
+        elif mount == 'dragon':
+            click_point(config.stables_dragon["x"], config.stables_dragon["y"])
+        click_point(config.stables_rent["x"], config.stables_rent["y"])
+        print("Mount kupiony!")
+        return "do_karczmy"
 
     def values_from_quests(self):
         q1time = get_needle_and_text(
