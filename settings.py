@@ -80,5 +80,9 @@ class Settings:
         self.energy_top_left = {x:1205,y:918}
         self.energy_bottom_right = {x:1289,y:945}
 
+        # gold in wallet
+        self.wallet_top_left = {x:300, y:96}
+        self.wallet_bottom_right= {x:399, y:136}
+
         # sphere positions for screenshots
         self.quest_no_mount_sphere = {"top": 600, "left": 500, "width": 500, "height": 450}

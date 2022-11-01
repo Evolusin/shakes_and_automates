@@ -16,7 +16,7 @@ def needle_position(img_needle):
     """
     login_vision = Vision(img_needle)
     screen = get_screenshot(config.monitor)
-    points = login_vision.find(screen, debug_mode=True)
+    points = login_vision.find(screen, debug_mode=False)
     if points:
         x,y,w,h = points
         x = x+(w/2)
@@ -30,7 +30,7 @@ def needle_position_once(img_needle, sphere = config.monitor):
     """
     login_vision = Vision(img_needle)
     screen = get_screenshot(sphere)
-    points = login_vision.find(screen, debug_mode=True)
+    points = login_vision.find(screen, debug_mode=False)
     if points:
         x,y,w,h = points
         x = x+(w/2)

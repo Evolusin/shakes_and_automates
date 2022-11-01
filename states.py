@@ -152,13 +152,31 @@ class States:
             return "eq_sell"
         print("Misja zaakceptowana. Przechodzę w tryb uśpienia")
         self.mission_sleep(best_quest_time)
-        return "logowanie"
+        return "do_karczmy"
 
     def mission_sleep(self, sleeptime):
+        ptime1 = time.perf_counter()
         print(f"Usypiam na {sleeptime} sekund")
-        time.sleep(sleeptime+10)
-        refresh_site()
+        check = False
+        while not check:
+            check = self.mission_sleep_check(ptime1, sleeptime)
+            time.sleep(5)
+        return True
 
+
+    def mission_sleep_check(self, remaining_time, sleeptime):
+        ptime2 = time.perf_counter()
+        count_time = ptime2 - remaining_time
+        if sleeptime > count_time:
+            return False
+        else:
+            return True
+
+    def upgrade(self):
+        wallet = self.get_gold()
+
+    def get_gold(self):
+        wallet = get_needle_and_text()
 
     def buy_mount(self):
         mount = config.mount

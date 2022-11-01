@@ -39,6 +39,9 @@ while True:
 
     elif faze == "karczma":
         faze = states.karczma()
+
+    elif faze == "upgrade":
+        faze = states.upgrade()
     
     elif faze == "eq_sell":
         faze = states.eq_sell()
