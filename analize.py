@@ -1,3 +1,4 @@
+from enum import Flag
 from vision import Vision
 from settings import Settings
 from windowcapture import get_screenshot, get_screenshot_grab
@@ -76,13 +77,13 @@ def get_needle_and_text(top,left,bottom,right, debug=False, numbers_only = False
         # cv.imshow('test',screen)
         print("start")
     text = needle_text(screen,debug=debug,numbers_only=numbers_only)
-    if text == "" or text == ")\n" or text == "(\n":
+    if text == "" or text == ")\n" or text == "(\n" or len(text)>8:
         screen = get_screenshot_grab(top-5,left-5,bottom+5,right+5)
         text = needle_text(screen,debug=debug,numbers_only=numbers_only)
-        if text == "" or text == ")\n" or text == "(\n":
+        if text == "" or text == ")\n" or text == "(\n" or len(text)>8:
             screen = get_screenshot_grab(top-10,left-10,bottom+10,right+10)
             text = needle_text(screen,debug=debug,numbers_only=numbers_only)
-            if text == ")\n" or text == "(\n":
+            if text == ")\n" or text == "(\n" or len(text)>8:
                 text = ""
                 return text
     return text
