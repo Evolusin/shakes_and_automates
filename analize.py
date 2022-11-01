@@ -76,12 +76,15 @@ def get_needle_and_text(top,left,bottom,right, debug=False):
         # cv.imshow('test',screen)
         print("start")
     text = needle_text(screen,debug=debug)
-    if text == "":
+    if text == "" or text == ")\n" or text == "(\n":
         screen = get_screenshot_grab(top-5,left-5,bottom+5,right+5)
         text = needle_text(screen,debug=debug)
-        if text == "":
-            screen = get_screenshot_grab(top-10,left-10,bottom+5,right+5)
+        if text == "" or text == ")\n" or text == "(\n":
+            screen = get_screenshot_grab(top-10,left-10,bottom+10,right+10)
             text = needle_text(screen,debug=debug)
+            if text == ")\n" or text == "(\n":
+                text = ""
+                return text
     return text
 
 def needle_text(img_needle, debug=False):
