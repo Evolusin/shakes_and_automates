@@ -89,7 +89,7 @@ class Settings:
         self.item5_sell_pos = {x:1730, y:265}
 
         # energy bar in quest hub
-        self.energy_top_left = {x:1205,y:918}
+        self.energy_top_left = {x:1216,y:916}
         self.energy_bottom_right = {x:1289,y:945}
 
         # gold in wallet

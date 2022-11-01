@@ -115,7 +115,10 @@ class States:
         Returns:
             string: next state
         """
-        print("Jestem w karczmie. Przechodzę do klikania npc od questów")
+        print("Jestem w karczmie")
+        energy_left = self.help.energy_left()
+        print(f"Energia - {energy_left}")
+        print("Przechodzę do klikania npc od questów")
         click_point(
             self.config.karczma_questnpc1["x"],
             self.config.karczma_questnpc1["y"],

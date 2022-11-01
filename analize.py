@@ -65,7 +65,7 @@ def click_point_right(x,y, debug=False):
     time.sleep(1)
 
 
-def get_needle_and_text(top,left,bottom,right, debug=False):
+def get_needle_and_text(top,left,bottom,right, debug=False, numbers_only = False):
     """
     Get's needle position and screenshots then returns text
     readed from it
@@ -75,19 +75,19 @@ def get_needle_and_text(top,left,bottom,right, debug=False):
         # time.sleep(1)
         # cv.imshow('test',screen)
         print("start")
-    text = needle_text(screen,debug=debug)
+    text = needle_text(screen,debug=debug,numbers_only=numbers_only)
     if text == "" or text == ")\n" or text == "(\n":
         screen = get_screenshot_grab(top-5,left-5,bottom+5,right+5)
-        text = needle_text(screen,debug=debug)
+        text = needle_text(screen,debug=debug,numbers_only=numbers_only)
         if text == "" or text == ")\n" or text == "(\n":
             screen = get_screenshot_grab(top-10,left-10,bottom+10,right+10)
-            text = needle_text(screen,debug=debug)
+            text = needle_text(screen,debug=debug,numbers_only=numbers_only)
             if text == ")\n" or text == "(\n":
                 text = ""
                 return text
     return text
 
-def needle_text(img_needle, debug=False):
+def needle_text(img_needle, debug=False, numbers_only=False):
     """
     Returns text readed from image
     """
@@ -96,7 +96,10 @@ def needle_text(img_needle, debug=False):
     #memory usage with image i.e. adding image to memory
     filename = "temp/{}.jpg".format('temporary')
     cv.imwrite(filename, gray)
-    text = pytesseract.image_to_string(Image.open(filename))
+    if numbers_only:
+        text = pytesseract.image_to_string(Image.open(filename),config="digits")
+    else:
+        text = pytesseract.image_to_string(Image.open(filename))
     os.remove(filename)
     if debug:
         print(f"Text from image - {text}")

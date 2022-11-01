@@ -66,6 +66,7 @@ class Helper:
             self.config.quest_time_right_down["x"],
             self.config.energy_bottom_right["y"],
             debug=False,
+            numbers_only=True
         )
         if energy_left == "":
             energy_left = get_needle_and_text(
@@ -74,15 +75,19 @@ class Helper:
                 self.config.quest_time_right_down["x"] + 3,
                 self.config.energy_bottom_right["y"] + 3,
                 debug=False,
+                numbers_only=True
             )
             if energy_left == "":
                 print("Nie udało mi się odczytać pozostałej energi")
-                return "exit"
+                return None
         if energy_left[0] == ";":
             energy_left = energy_left[1:]
         energy_left = energy_left.replace(";", ".")
         energy_left = energy_left.replace(",", ".")
         energy_left = energy_left.replace(")", "")
+        if len(energy_left)>2:
+            energy_left = energy_left[:2]
+        return energy_left
 
     def get_quests_info(self, debug=False):
         (
@@ -114,6 +119,9 @@ class Helper:
         for qtime, gold in zip(questes_time, questes_gold):
             questes_ratio[i] = round(float(qtime / gold), 2)
             i = i + 1
+        if debug:
+            print(f"Gold misji po wyczyszczeniu: {questes_gold}")
+            print(f"Czas misji po wyczyszczeniu: {questes_time}")
         print(f"Opłacalność misji {questes_ratio}")
         best_quest = min(questes_ratio, key=questes_ratio.get)
         best_quest_time = questes_time[best_quest - 1]
