@@ -44,12 +44,6 @@ class States:
         if login_position:
             x, y = login_position
             click_point(x, y)
-            codzienne_logowanie = needle_position_once(
-                config.logowanie_codzienne
-            )
-            if codzienne_logowanie:
-                x, y = codzienne_logowanie
-                click_point(x, y)
             print("Przechodzę do quest_check")
             return "quest_check"
         else:
@@ -92,6 +86,12 @@ class States:
         Returns:
             string: next state
         """
+        codzienne_logowanie = needle_position_once(
+                config.logowanie_codzienne
+            )
+        if codzienne_logowanie:
+            x, y = codzienne_logowanie
+            click_point(x, y)
         karczma_check = needle_position_once(config.karczma_check)
         karczma_position = needle_position_once(config.karczma_needle)
         if karczma_check:
