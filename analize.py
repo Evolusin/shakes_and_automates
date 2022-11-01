@@ -65,17 +65,23 @@ def click_point_right(x,y, debug=False):
     time.sleep(1)
 
 
-def get_needle_and_text(top,left,width,height, debug=False):
+def get_needle_and_text(top,left,bottom,right, debug=False):
     """
     Get's needle position and screenshots then returns text
     readed from it
     """
-    screen = get_screenshot_grab(top,left,width,height)
+    screen = get_screenshot_grab(top,left,bottom,right)
     if debug:
         # time.sleep(1)
         # cv.imshow('test',screen)
         print("start")
     text = needle_text(screen,debug=debug)
+    if text == "":
+        screen = get_screenshot_grab(top-5,left-5,bottom+5,right+5)
+        text = needle_text(screen,debug=debug)
+        if text == "":
+            screen = get_screenshot_grab(top-10,left-10,bottom+5,right+5)
+            text = needle_text(screen,debug=debug)
     return text
 
 def needle_text(img_needle, debug=False):

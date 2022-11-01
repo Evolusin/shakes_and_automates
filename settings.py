@@ -1,5 +1,9 @@
 import os
 import pyautogui
+from stats_upgrade import StatsUpgrade
+
+stats = StatsUpgrade()
+
 
 
 class Settings:
@@ -7,13 +11,21 @@ class Settings:
         self.img_dir = "img/"
         self.width, self.height = pyautogui.size()
         self.monitor = {"top": 0, "left": 0, "width": self.width, "height": self.height}
-        self.state = "logowanie"
+        self.state = "upgrade"
         self.quest_mode = "gold"
         # for mac it's 1.7778 / Full HD - 1
         # https://www.omnicalculator.com/other/resolution-scale
         self.scale = 1
         # wolf / raptor / dragon
         self.mount = 'wolf'
+
+        # Stats for upgrade
+        self.current_gold = stats.current_gold 
+        self.u_strength = stats.u_strength
+        self.u_dexterity = stats.u_dexterity
+        self.u_inteligence = stats.u_inteligence
+        self.u_constitution = stats.u_constitution
+        self.u_luck = stats.u_luck
 
         # templates
         self.login_needle = f"{self.img_dir}login.png"

@@ -16,6 +16,9 @@ config = Settings()
 
 
 class States:
+    gold_ammount = 0
+
+
     def s_debug(self):
         """Enters debug mode in infinte loop
 
@@ -86,9 +89,7 @@ class States:
         Returns:
             string: next state
         """
-        codzienne_logowanie = needle_position_once(
-                config.logowanie_codzienne
-            )
+        codzienne_logowanie = needle_position_once(config.logowanie_codzienne)
         if codzienne_logowanie:
             x, y = codzienne_logowanie
             click_point(x, y)
@@ -128,12 +129,14 @@ class States:
                     config.karczma_questnpc3["x"],
                     config.karczma_questnpc3["y"],
                 )
-        mount = needle_position_once(config.quest_no_mount, config.quest_no_mount_sphere)
+        mount = needle_position_once(
+            config.quest_no_mount, config.quest_no_mount_sphere
+        )
         if mount:
             print("Brak mounta!")
             buy_mount = self.buy_mount()
             return buy_mount
-        best_quest, best_quest_time= self.get_quests_info(debug=True)
+        best_quest, best_quest_time = self.get_quests_info(debug=True)
         print(f"Akceptuję misję nr: {best_quest}")
         print(f"Czas jej wykonania - {best_quest_time} sekund")
         if best_quest == 1:
@@ -163,7 +166,6 @@ class States:
             time.sleep(5)
         return True
 
-
     def mission_sleep_check(self, remaining_time, sleeptime):
         ptime2 = time.perf_counter()
         count_time = ptime2 - remaining_time
@@ -174,20 +176,34 @@ class States:
 
     def upgrade(self):
         wallet = self.get_gold()
+        print(wallet)
+        print(type(wallet))
+        return "exit"
 
     def get_gold(self):
-        wallet = get_needle_and_text()
+        print("Getting gold")
+        wallet = get_needle_and_text(
+            config.wallet_top_left["x"],
+            config.wallet_top_left["y"],
+            config.wallet_bottom_right["x"],
+            config.wallet_bottom_right["y"],
+        )
+        wallet = str(wallet)
+        wallet = wallet.replace(",", ".")
+        wallet = wallet.replace("\n", "")
+
+        return float(wallet)
 
     def buy_mount(self):
         mount = config.mount
         print(f"Przechodzę do kupywania - {mount}")
         click_point(config.stables["x"], config.stables["y"])
         # TODO - Check gold before buying
-        if mount == 'wolf':
+        if mount == "wolf":
             click_point(config.stables_wolf["x"], config.stables_wolf["y"])
-        elif mount == 'raptor':
+        elif mount == "raptor":
             click_point(config.stables_raptor["x"], config.stables_raptor["y"])
-        elif mount == 'dragon':
+        elif mount == "dragon":
             click_point(config.stables_dragon["x"], config.stables_dragon["y"])
         click_point(config.stables_rent["x"], config.stables_rent["y"])
         print("Mount kupiony!")
@@ -327,7 +343,7 @@ class States:
             i = i + 1
         print(f"Opłacalność misji {questes_ratio}")
         best_quest = min(questes_ratio, key=questes_ratio.get)
-        best_quest_time = questes_time[best_quest-1]
+        best_quest_time = questes_time[best_quest - 1]
         return best_quest, best_quest_time
 
     def eq_sell(self):
