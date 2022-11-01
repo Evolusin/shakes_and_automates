@@ -11,7 +11,7 @@ class Settings:
         self.img_dir = "img/"
         self.width, self.height = pyautogui.size()
         self.monitor = {"top": 0, "left": 0, "width": self.width, "height": self.height}
-        self.state = "upgrade"
+        self.state = "logowanie"
         self.quest_mode = "gold"
         # for mac it's 1.7778 / Full HD - 1
         # https://www.omnicalculator.com/other/resolution-scale
