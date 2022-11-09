@@ -9,13 +9,11 @@ stats = StatsUpgrade()
 class Settings:
     def __init__(self):
         self.img_dir = "img/"
-        self.width, self.height = pyautogui.size()
+        self.width, self.height, self.scale_w, self.scale_h = self.screen_scaller()
         self.monitor = {"top": 0, "left": 0, "width": self.width, "height": self.height}
         self.state = "logowanie"
         self.quest_mode = "gold"
-        # for mac it's 1.7778 / Full HD - 1
-        # https://www.omnicalculator.com/other/resolution-scale
-        self.scale = 1
+
         # wolf / raptor / dragon
         self.mount = 'wolf'
 
@@ -28,18 +26,19 @@ class Settings:
         self.u_luck = stats.u_luck
 
         # templates
-        self.login_needle = f"{self.img_dir}login.png"
-        self.karczma_needle = f"{self.img_dir}karczma.png"
-        self.karczma_check = f"{self.img_dir}karczma_check.png"
-        self.karczma_quest_accept = f"{self.img_dir}karczma_quest_accept.png"
-        self.quest_check = f"{self.img_dir}na_misji.png"
-        self.misja_koniec = f"{self.img_dir}misja_koniec.png"
-        self.lvl_up = f"{self.img_dir}nowy_poziom.png"
-        self.lvl_up_continue = f"{self.img_dir}nowy_poziom_continue.png"
-        self.logowanie_codzienne = f"{self.img_dir}odbierz.png"
-        self.full_eq = f"{self.img_dir}full_eq.png"
-        self.character_menu = f"{self.img_dir}character_menu.png"
-        self.quest_no_mount = f"{self.img_dir}quest_no_mount.png"
+        #TODO need to figure how to dynamic resive all template with cv.resize()
+        self.login_needle = self.load_img("login")
+        self.karczma_needle = self.load_img("karczma")
+        self.karczma_check = self.load_img("karczma_check")
+        self.karczma_quest_accept = self.load_img("karczma_quest_accept")
+        self.quest_check = self.load_img("na_misji")
+        self.misja_koniec = self.load_img("misja_koniec")
+        self.lvl_up = self.load_img("nowy_poziom")
+        self.lvl_up_continue = self.load_img("nowy_poziom_continue")
+        self.logowanie_codzienne = self.load_img("odbierz")
+        self.full_eq = self.load_img("full_eq")
+        self.character_menu = self.load_img("character_menu")
+        self.quest_no_mount = self.load_img("quest_no_mount")
         # variable for x/y positions
         x = "x"
         y = "y"
@@ -98,3 +97,16 @@ class Settings:
 
         # sphere positions for screenshots
         self.quest_no_mount_sphere = {"top": 600, "left": 500, "width": 500, "height": 450}
+
+    def load_img(self, img, format='.png'):
+            return f"{self.img_dir}{img}{format}"
+
+    def screen_scaller(self):
+            current_width, current_height = pyautogui.size()
+            scale_w = 1920 / current_width
+            scale_h = 1080 / current_height
+            width = round(1920/scale_w)
+            height = round(1080/scale_h)
+            return width, height, scale_w, scale_h
+
+tes = Settings()

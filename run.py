@@ -4,8 +4,7 @@ import cv2 as cv
 from settings import Settings
 from analize import needle_position, click_point, get_needle_and_text, needle_position_once
 from states import States
-import time
-import pyautogui
+
 
 
 config = Settings()
