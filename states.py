@@ -92,14 +92,18 @@ class States:
         Returns:
             string: next state
         """
+        print("here")
         codzienne_logowanie = needle_position_once(
             self.config.logowanie_codzienne
         )
         if codzienne_logowanie:
             x, y = codzienne_logowanie
             click_point(x, y)
+        print("here2")
         karczma_check = needle_position_once(self.config.karczma_check)
+        print("Karczma check")
         karczma_position = needle_position_once(self.config.karczma_needle)
+        print("Karczma position")
         if karczma_check:
             return "karczma"
         else:

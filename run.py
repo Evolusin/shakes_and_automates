@@ -16,6 +16,7 @@ faze = config.state
 # print(pyautogui.position())
 
 print("Launched")
+time.sleep(2)
 
 while True:
     if faze == "mouse_pos":
