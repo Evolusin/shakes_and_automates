@@ -50,10 +50,10 @@ class States:
         if login_position:
             x, y = login_position
             click_point(x, y)
-            print("Przechodzę do quest_check")
+            print("Przechodze do quest_check")
             return "quest_check"
         else:
-            print("Jesteś już zalogowany. Przechodzę do quest_check")
+            print("Jestes już zalogowany. Przechodze do quest_check")
             return "quest_check"
 
     def quest_check(self):
@@ -70,7 +70,7 @@ class States:
             print("Postać jest na misji")
             return "exit"
         elif finish_quest:
-            print("Wykryłem skończoną misję")
+            print("Wykrylem skończoną misje")
             x, y = finish_quest
             click_point(x, y)
             lvl_up = needle_position(self.config.lvl_up)
@@ -122,7 +122,7 @@ class States:
         print("Jestem w karczmie")
         energy_left = self.help.energy_left()
         print(f"Energia - {energy_left}")
-        print("Przechodzę do klikania npc od questów")
+        print("Przechodze do klikania npc od questów")
         click_point(
             self.config.karczma_questnpc1["x"],
             self.config.karczma_questnpc1["y"],
@@ -150,7 +150,7 @@ class States:
             print("Brak mounta!")
             self.help.buy_mount()
         best_quest, best_quest_time = self.help.get_quests_info(debug=True)
-        print(f"Akceptuję misję nr: {best_quest}")
+        print(f"Akceptuje misje nr: {best_quest}")
         print(f"Czas jej wykonania - {best_quest_time} sekund")
         if best_quest == 1:
             click_point(
@@ -169,7 +169,7 @@ class States:
         )
         if self.help.full_eq_check():
             return "eq_sell"
-        print("Misja zaakceptowana. Przechodzę w tryb uśpienia")
+        print("Misja zaakceptowana. Przechodze w tryb uspienia")
         self.help.mission_sleep(best_quest_time)
         return "quest_check"
 
@@ -179,17 +179,17 @@ class States:
         return "exit"
 
     def eq_sell(self):
-        print("Przechodzę do ekwipunku")
+        print("Przechodze do ekwipunku")
         click_point(
             self.config.character_menu["x"], self.config.character_menu["y"]
         )
         print("Zaczynam sprzedawać przedmioty")
         self.help.sell_equipment()
-        print("Sprzedałem wszystkie itemy")
-        print("Przechodzę do karczmy")
+        print("Sprzedalem wszystkie itemy")
+        print("Przechodze do karczmy")
         return "quest_check"
 
     def energry_status(self):
         energy_left = self.help.energy_left()
-        print(f"Pozostała energia - {energy_left}")
+        print(f"Pozostala energia - {energy_left}")
         return "exit"
