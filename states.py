@@ -45,8 +45,7 @@ class States:
         """
         login_position = needle_position_once(self.config.login_needle)
         if login_position:
-            x, y = login_position
-            click_point(x, y)
+            click_point(self.config.login["x"], self.config.login["y"])
             print("Przechodze do quest_check")
             return "quest_check"
         else:
@@ -149,7 +148,7 @@ class States:
         energy_check = needle_position_once(self.config.no_eneregy)
         if energy_check:
             print("No energy left")
-            return "exit"
+            return "upgrade"
 
         click_point(
             self.config.karczma_quest["x"], self.config.karczma_quest["y"]
@@ -160,14 +159,25 @@ class States:
         return "quest_check"
 
     def upgrade(self):
-        return "sleep"
+        print("Upgrade statystyk")
+        click_point(self.config.character_menu["x"],self.config.character_menu["y"])
+        for i in range(7):
+            click_point(self.config.strength["x"], self.config.strength["y"])
+            click_point(self.config.agility["x"], self.config.agility["y"])
+            click_point(self.config.inteligence["x"], self.config.inteligence["y"])
+            click_point(self.config.constitution["x"], self.config.constitution["y"])
+        return "exiting"
+    
+    def exiting():
+        print("Wylaczam bota")
+        return None
 
     def eq_sell(self):
         print("Przechodze do ekwipunku")
         click_point(
             self.config.character_menu["x"], self.config.character_menu["y"]
         )
-        print("Zaczynam sprzedawać przedmioty")
+        print("Zaczynam sprzedawac przedmioty")
         self.help.sell_equipment()
         print("Sprzedalem wszystkie itemy")
         print("Przechodze do karczmy")

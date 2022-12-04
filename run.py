@@ -2,7 +2,6 @@ from calendar import c
 from os import stat
 import cv2 as cv
 from settings import Settings
-from analize import needle_position, click_point, get_needle_and_text, needle_position_once
 from states import States
 import time
 import random
@@ -55,8 +54,8 @@ while True:
     elif faze == "energry_status":
         faze = states.energry_status()
     
-    elif faze == "exit":
-        print("Exiting bot")
+    elif faze == "exiting":
+        faze = states.exiting()
         break
 
     if cv.waitKey(1) == ord("q"):

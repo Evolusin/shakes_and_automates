@@ -46,7 +46,6 @@ class Settings:
             self.lvl_up_continue = f"{self.img_dir}nowy_poziom_continue.png"
             self.logowanie_codzienne = f"{self.img_dir}odbierz.png"
             self.full_eq = f"{self.img_dir}full_eq.png"
-            self.character_menu = f"{self.img_dir}character_menu.png"
             self.quest_no_mount = f"{self.img_dir}quest_no_mount.png"
             self.no_eneregy = f"{self.img_dir}no_energy.png"
 
@@ -82,7 +81,9 @@ class Settings:
         # full eq cancel button position
         self.full_eq_cancel_pos = {x: 1243, y: 700}
         # character menu
-        self.character_menu = {x: 229, y: 175}
+        self.character_menu = {x: 230, y: 160}
+        # login main screen position
+        self.login = {x: 1150, y: 510}
         # stables
         self.stables = {x: 323, y: 525}
         # stables - wolf
@@ -122,3 +123,6 @@ class Settings:
 
         # upgrade stats positions
         self.strength = {x: 788, y: 669}
+        self.agility = {x: 788, y: 746}
+        self.inteligence = {x: 788, y: 809}
+        self.constitution = {x: 1081, y: 669}
