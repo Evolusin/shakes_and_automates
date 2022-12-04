@@ -19,11 +19,11 @@ while True:
         faze = states.s_mouse_pos
 
     elif faze == "debug":
-        print(config.karczma_questnpc1['x'])
-        print(config.karczma_questnpc1['y'])
-        
+        print(config.karczma_questnpc1["x"])
+        print(config.karczma_questnpc1["y"])
+
     elif faze == "sleep":
-        x = random.randrange(50,150)
+        x = random.randrange(50, 150)
         print(f"Zasypiam na {x} sekund")
         time.sleep(x)
         faze = "logowanie"
@@ -39,18 +39,18 @@ while True:
         faze = states.do_karczmy()
 
     elif faze == "karczma":
-        quest_done=quest_done+1
+        quest_done = quest_done + 1
         faze = states.karczma()
 
     elif faze == "upgrade":
         faze = states.upgrade()
-    
+
     elif faze == "eq_sell":
         faze = states.eq_sell()
 
     elif faze == "energry_status":
         faze = states.energry_status()
-    
+
     elif faze == "exiting":
         faze = states.exiting()
         break

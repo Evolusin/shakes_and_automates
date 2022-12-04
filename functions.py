@@ -12,19 +12,20 @@ from analize import (
 import time
 import pyautogui
 
+
 class Helper:
     def __init__(self) -> None:
         self.config = Settings()
         pass
-    
+
     def mission_sleep(self, sleeptime):
-            ptime1 = time.perf_counter()
-            print(f"Usypiam na {sleeptime} sekund")
-            check = False
-            while not check:
-                check = self.mission_sleep_check(ptime1, sleeptime)
-                time.sleep(5)
-            return True
+        ptime1 = time.perf_counter()
+        print(f"Usypiam na {sleeptime} sekund")
+        check = False
+        while not check:
+            check = self.mission_sleep_check(ptime1, sleeptime)
+            time.sleep(5)
+        return True
 
     def mission_sleep_check(self, remaining_time, sleeptime):
         ptime2 = time.perf_counter()
@@ -66,7 +67,7 @@ class Helper:
             self.config.quest_time_right_down["x"],
             self.config.energy_bottom_right["y"],
             debug=False,
-            numbers_only=True
+            numbers_only=True,
         )
         if energy_left == "":
             energy_left = get_needle_and_text(
@@ -75,7 +76,7 @@ class Helper:
                 self.config.quest_time_right_down["x"] + 3,
                 self.config.energy_bottom_right["y"] + 3,
                 debug=False,
-                numbers_only=True
+                numbers_only=True,
             )
             if energy_left == "":
                 print("Nie udało mi się odczytać pozostałej energi")
@@ -85,7 +86,7 @@ class Helper:
         energy_left = energy_left.replace(";", ".")
         energy_left = energy_left.replace(",", ".")
         energy_left = energy_left.replace(")", "")
-        if len(energy_left)>2:
+        if len(energy_left) > 2:
             energy_left = energy_left[:2]
         return energy_left
 

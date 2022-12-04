@@ -1,11 +1,7 @@
 from calendar import c
 import cv2 as cv
 from settings import Settings
-from analize import (
-    needle_position,
-    click_point,
-    needle_position_once
-)
+from analize import needle_position, click_point, needle_position_once
 import time
 import pyautogui
 from functions import Helper
@@ -27,7 +23,6 @@ class States:
         """
         print("Debug mode")
         return "debug"
-
 
     def logowanie(self):
         """Checks if user is already logged in the game
@@ -152,14 +147,20 @@ class States:
 
     def upgrade(self):
         print("Upgrade statystyk")
-        click_point(self.config.character_menu["x"],self.config.character_menu["y"])
+        click_point(
+            self.config.character_menu["x"], self.config.character_menu["y"]
+        )
         for i in range(7):
             click_point(self.config.strength["x"], self.config.strength["y"])
             click_point(self.config.agility["x"], self.config.agility["y"])
-            click_point(self.config.inteligence["x"], self.config.inteligence["y"])
-            click_point(self.config.constitution["x"], self.config.constitution["y"])
+            click_point(
+                self.config.inteligence["x"], self.config.inteligence["y"]
+            )
+            click_point(
+                self.config.constitution["x"], self.config.constitution["y"]
+            )
         return "exiting"
-    
+
     def exiting():
         print("Wylaczam bota")
         return None
