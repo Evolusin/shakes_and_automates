@@ -27,7 +27,7 @@ def needle_position(img_needle):
 
 def needle_position_once(img_needle, sphere = config.monitor):
     """
-    Anlizes screen once and returns img_needle position if found
+    Anlizes screen once and returns x,y points position if found
     """
     login_vision = Vision(img_needle)
     screen = get_screenshot(sphere)
