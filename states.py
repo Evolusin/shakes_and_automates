@@ -53,7 +53,7 @@ class States:
             print("Przechodze do quest_check")
             return "quest_check"
         else:
-            print("Jestes już zalogowany. Przechodze do quest_check")
+            print("Jestes juz zalogowany. Przechodze do quest_check")
             return "quest_check"
 
     def quest_check(self):
