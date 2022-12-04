@@ -1,7 +1,4 @@
 import pyautogui
-from stats_upgrade import StatsUpgrade
-
-stats = StatsUpgrade()
 
 
 class Settings:
@@ -15,7 +12,7 @@ class Settings:
             "width": self.width,
             "height": self.height,
         }
-        self.state = "logowanie"
+        self.state = "upgrade"
         # wolf / raptor / dragon
         self.mount = "wolf"
 
@@ -35,6 +32,7 @@ class Settings:
             self.full_eq = f"{self.img_dir}full_eq.png"
             self.quest_no_mount = f"{self.img_dir}quest_no_mount.png"
             self.no_eneregy = f"{self.img_dir}no_energy.png"
+            self.stats_no_more_gold = f"{self.img_dir}stats_no_more_gold.png"
 
         # variable for x/y positions
         x = "x"

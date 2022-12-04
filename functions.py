@@ -1,13 +1,12 @@
 from calendar import c
 import cv2 as cv
+import itertools
 from settings import Settings
 from analize import (
     click_point_right,
     needle_position,
     click_point,
-    get_needle_and_text,
     needle_position_once,
-    refresh_site,
 )
 import time
 import pyautogui
@@ -73,3 +72,24 @@ class Helper:
                 self.config.full_eq_cancel_pos["y"],
             )
             return True
+
+    def upgrade_stats(self):
+        stats_to_upgrade = [
+            self.config.strength,
+            self.config.agility,
+            self.config.inteligence,
+            self.config.constitution,
+        ]
+        upgrades = 0
+        #788,674 72,85,44 #48552C
+        still_have_gold = True
+        while still_have_gold:
+            for stat in itertools.cycle(stats_to_upgrade):
+                click_point(stat["x"], stat["y"])
+                upgrades = upgrades + 1
+                r, g, b = pyautogui.pixel(788,674)
+                if r == 72:
+                    still_have_gold = False
+                    break
+        print(f"Zrobilem upgrade {upgrades} razy")
+        return None

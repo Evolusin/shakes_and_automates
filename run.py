@@ -46,9 +46,6 @@ while True:
     elif faze == "eq_sell":
         faze = states.eq_sell()
 
-    elif faze == "energry_status":
-        faze = states.energry_status()
-
     elif faze == "exiting":
         faze = states.exiting()
         break
