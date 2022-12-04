@@ -9,8 +9,7 @@ stats = StatsUpgrade()
 class Settings:
     def __init__(self):
         self.img_dir = "img/"
-        if os.getenv("islinux") == "mikrus":
-            self.linux = True
+        self.linux = True
         self.width, self.height = pyautogui.size()
         self.monitor = {"top": 0, "left": 0, "width": self.width, "height": self.height}
         self.state = "logowanie"
