@@ -73,6 +73,7 @@ class States:
             print("Wykrylem skończoną misje")
             x, y = finish_quest
             click_point(x, y)
+            time.sleep(4)
             lvl_up = needle_position(self.config.lvl_up)
             if lvl_up:
                 lvl_up_continue = needle_position(self.config.lvl_up_continue)
@@ -83,6 +84,13 @@ class States:
                 return "do_karczmy"
         else:
             print("Nie wykryto misji")
+            time.sleep(3)
+            lvl_up = needle_position(self.config.lvl_up)
+            if lvl_up:
+                print("Wykrylem level up")
+                lvl_up_continue = needle_position(self.config.lvl_up_continue)
+                x, y = lvl_up_continue
+                click_point(x, y)
             return "do_karczmy"
 
     def do_karczmy(self):
@@ -92,18 +100,14 @@ class States:
         Returns:
             string: next state
         """
-        print("here")
         codzienne_logowanie = needle_position_once(
             self.config.logowanie_codzienne
         )
         if codzienne_logowanie:
             x, y = codzienne_logowanie
             click_point(x, y)
-        print("here2")
         karczma_check = needle_position_once(self.config.karczma_check)
-        print("Karczma check")
         karczma_position = needle_position_once(self.config.karczma_needle)
-        print("Karczma position")
         if karczma_check:
             return "karczma"
         else:
@@ -120,8 +124,6 @@ class States:
             string: next state
         """
         print("Jestem w karczmie")
-        energy_left = self.help.energy_left()
-        print(f"Energia - {energy_left}")
         print("Przechodze do klikania npc od questów")
         click_point(
             self.config.karczma_questnpc1["x"],
@@ -144,40 +146,19 @@ class States:
                     self.config.karczma_questnpc3["y"],
                 )
         mount = needle_position_once(
-            self.config.quest_no_mount, self.config.quest_no_mount_sphere
-        )
+            self.config.quest_no_mount)
         if mount:
             print("Brak mounta!")
             self.help.buy_mount()
-        # best_quest, best_quest_time = self.help.get_quests_info(debug=True)
-        # print(f"Akceptuje misje nr: {best_quest}")
-        # print(f"Czas jej wykonania - {best_quest_time} sekund")
-        # if best_quest == 1:
-        #     click_point(
-        #         self.config.quest1_pos["x"], self.config.quest1_pos["y"]
-        #     )
-        # elif best_quest == 2:
-        #     click_point(
-        #         self.config.quest2_pos["x"], self.config.quest2_pos["y"]
-        #     )
-        # else:
-        #     click_point(
-        #         self.config.quest3_pos["x"], self.config.quest3_pos["y"]
-        #     )
         click_point(
             self.config.karczma_quest["x"], self.config.karczma_quest["y"]
         )
         if self.help.full_eq_check():
             return "eq_sell"
         print("Misja zaakceptowana. Przechodze w tryb uspienia")
-        # self.help.mission_sleep(best_quest_time)
-        # TODO Remove after pytesseract fixed
-        exit()
         return "quest_check"
 
     def upgrade(self):
-        wallet = self.help.get_gold()
-        print(f"Stan golda {wallet}")
         return "exit"
 
     def eq_sell(self):
@@ -192,6 +173,4 @@ class States:
         return "quest_check"
 
     def energry_status(self):
-        energy_left = self.help.energy_left()
-        print(f"Pozostala energia - {energy_left}")
         return "exit"

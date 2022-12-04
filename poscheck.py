@@ -1,9 +1,8 @@
 import pyautogui
+import time
+import sys
+
+sys.platform = '_'
 
 
-
-while True:
-    print(pyautogui.mouseInfo())
-
-    if pyautogui.keyDown("q"):
-        exit()
+pyautogui.mouseInfo()

@@ -11,12 +11,12 @@ import pyautogui
 config = Settings()
 states = States()
 faze = config.state
-
+quest_done = 0
 # DEBUG MOUSE POS
 # print(pyautogui.position())
 
-print("Launched")
 time.sleep(2)
+print("Launched")
 
 while True:
     if faze == "mouse_pos":
@@ -27,9 +27,12 @@ while True:
         print(config.karczma_questnpc1['y'])
         
     elif faze == "exit":
-        break
+        print("Zasypiam na 150 sekund")
+        time.sleep(150)
+        faze = "logowanie"
 
     elif faze == "logowanie":
+        print(f"Ilosc zrobionych na ten moment questow {quest_done}")
         faze = states.logowanie()
 
     elif faze == "quest_check":
@@ -39,6 +42,7 @@ while True:
         faze = states.do_karczmy()
 
     elif faze == "karczma":
+        quest_done=quest_done+1
         faze = states.karczma()
 
     elif faze == "upgrade":
