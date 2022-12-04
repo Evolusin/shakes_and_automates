@@ -57,7 +57,7 @@ class States:
             return "quest_check"
 
     def quest_check(self):
-        """Checks if char is on the mission. If yes then returns exit state.
+        """Checks if char is on the mission. If yes then returns sleep state.
         Otherwise returns do_karczmy state
 
         Returns:
@@ -68,7 +68,7 @@ class States:
         finish_quest = needle_position_once(self.config.misja_koniec)
         if quest_check:
             print("Postać jest na misji")
-            return "exit"
+            return "sleep"
         elif finish_quest:
             print("Wykrylem skończoną misje")
             x, y = finish_quest
@@ -118,7 +118,7 @@ class States:
 
     def karczma(self):
         """Clickes in order on NPC localistions. If NPC is found then
-        accepts quest and returns exit state
+        accepts quest and returns sleep state
 
         Returns:
             string: next state
@@ -150,6 +150,11 @@ class States:
         if mount:
             print("Brak mounta!")
             self.help.buy_mount()
+        energy_check = needle_position_once(self.config.no_eneregy)
+        if energy_check:
+            print("No energy left")
+            return "exit"
+            
         click_point(
             self.config.karczma_quest["x"], self.config.karczma_quest["y"]
         )
@@ -159,7 +164,7 @@ class States:
         return "quest_check"
 
     def upgrade(self):
-        return "exit"
+        return "sleep"
 
     def eq_sell(self):
         print("Przechodze do ekwipunku")
@@ -173,4 +178,4 @@ class States:
         return "quest_check"
 
     def energry_status(self):
-        return "exit"
+        return "sleep"

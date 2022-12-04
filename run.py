@@ -26,7 +26,7 @@ while True:
         print(config.karczma_questnpc1['x'])
         print(config.karczma_questnpc1['y'])
         
-    elif faze == "exit":
+    elif faze == "sleep":
         print("Zasypiam na 150 sekund")
         time.sleep(150)
         faze = "logowanie"
