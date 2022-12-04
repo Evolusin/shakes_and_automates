@@ -1,7 +1,4 @@
 import pyautogui
-from stats_upgrade import StatsUpgrade
-
-stats = StatsUpgrade()
 
 
 class Settings:
@@ -35,11 +32,13 @@ class Settings:
             self.full_eq = f"{self.img_dir}full_eq.png"
             self.quest_no_mount = f"{self.img_dir}quest_no_mount.png"
             self.no_eneregy = f"{self.img_dir}no_energy.png"
-
         # variable for x/y positions
         x = "x"
         y = "y"
+        r = "r"
 
+        # safe pos for mouse
+        self.safe_pos = {x: 100, y: 100}
         # static positions for mouse click
         # middle npc
         self.karczma_questnpc1 = {x: self.width / 1.91, y: self.height / 1.5}
@@ -81,3 +80,6 @@ class Settings:
         self.agility = {x: 788, y: 746}
         self.inteligence = {x: 788, y: 809}
         self.constitution = {x: 1081, y: 669}
+
+        # upgrade check gold pos and color for empty pocket
+        self.upgrade_gold_check = {x: 788, y: 674, r:72}
