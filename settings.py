@@ -43,6 +43,7 @@ class Settings:
             self.character_menu = f"{self.img_dir}character_menu.png"
             self.quest_no_mount = f"{self.img_dir}quest_no_mount.png"
         else:
+            self.login_needle = f"{self.img_dir}login.png"
             self.karczma_needle = f"{self.img_dir}karczma_linux.png"
             self.karczma_quest_accept = f"{self.img_dir}karczma_quest_accept_linux.png"
             self.quest_no_mount = f"{self.img_dir}quest_no_mount_linux.png"
