@@ -1,5 +1,3 @@
-from calendar import c
-from os import stat
 import cv2 as cv
 from settings import Settings
 from states import States
@@ -11,8 +9,7 @@ config = Settings()
 states = States()
 faze = config.state
 quest_done = 0
-# DEBUG MOUSE POS
-# print(pyautogui.position())
+
 
 time.sleep(2)
 print("Launched")

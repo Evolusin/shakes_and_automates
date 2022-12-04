@@ -28,14 +28,6 @@ class States:
         print("Debug mode")
         return "debug"
 
-    def s_mouse_pos(self):
-        """Gives mouse location in infnite loop
-
-        Returns:
-            string: mouse_pos
-        """
-        print(pyautogui.position())
-        return "mouse_pos"
 
     def logowanie(self):
         """Checks if user is already logged in the game
@@ -182,6 +174,3 @@ class States:
         print("Sprzedalem wszystkie itemy")
         print("Przechodze do karczmy")
         return "quest_check"
-
-    def energry_status(self):
-        return "sleep"

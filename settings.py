@@ -17,20 +17,8 @@ class Settings:
             "height": self.height,
         }
         self.state = "logowanie"
-        self.quest_mode = "gold"
-        # for mac it's 1.7778 / Full HD - 1
-        # https://www.omnicalculator.com/other/resolution-scale
-        self.scale = 1
         # wolf / raptor / dragon
         self.mount = "wolf"
-
-        # Stats for upgrade
-        self.current_gold = stats.current_gold
-        self.u_strength = stats.u_strength
-        self.u_dexterity = stats.u_dexterity
-        self.u_inteligence = stats.u_inteligence
-        self.u_constitution = stats.u_constitution
-        self.u_luck = stats.u_luck
 
         # templates
         if not self.linux:
@@ -62,22 +50,6 @@ class Settings:
         self.karczma_questnpc3 = {x: self.width / 2.36, y: self.height / 1.42}
         # mission confirm
         self.karczma_quest = {x: self.width / 1.66, y: self.height / 1.44}
-        # quest time expected position and lenght
-        self.quest_time_right_down = {
-            x: int(self.width / 1.444),
-            y: int(self.height / 1.574),
-        }
-        self.quest_time_top_left = {
-            x: int(self.width / 1.515),
-            y: int(self.height / 1.655),
-        }
-        # quest gold expected position and lenght
-        self.quest_gold_right_down = {x: 970, y: 691}
-        self.quest_gold_top_left = {x: 884, y: 651}
-        # quests 1/2/3 button position
-        self.quest1_pos = {x: 922, y: 400}
-        self.quest2_pos = {x: 1097, y: 386}
-        self.quest3_pos = {x: 1397, y: 403}
         # full eq cancel button position
         self.full_eq_cancel_pos = {x: 1243, y: 700}
         # character menu
@@ -104,22 +76,6 @@ class Settings:
         self.item4_sell_pos = {x: 1565, y: 298}
         self.item5_pos = {x: 1669, y: 204}
         self.item5_sell_pos = {x: 1669, y: 298}
-
-        # energy bar in quest hub
-        self.energy_top_left = {x: 1216, y: 916}
-        self.energy_bottom_right = {x: 1289, y: 945}
-
-        # gold in wallet
-        self.wallet_top_left = {x: 300, y: 96}
-        self.wallet_bottom_right = {x: 399, y: 136}
-
-        # sphere positions for screenshots
-        self.quest_no_mount_sphere = {
-            "top": 600,
-            "left": 500,
-            "width": 500,
-            "height": 450,
-        }
 
         # upgrade stats positions
         self.strength = {x: 788, y: 669}
