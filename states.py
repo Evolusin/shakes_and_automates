@@ -1,9 +1,6 @@
-from calendar import c
-import cv2 as cv
 from settings import Settings
 from analize import needle_position, click_point, needle_position_once
 import time
-import pyautogui
 from functions import Helper
 
 

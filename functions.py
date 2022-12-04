@@ -7,6 +7,7 @@ from analize import (
     needle_position,
     click_point,
     needle_position_once,
+    move_to,
 )
 import time
 import pyautogui
@@ -81,14 +82,18 @@ class Helper:
             self.config.constitution,
         ]
         upgrades = 0
-        #788,674 72,85,44 #48552C
+        # 788,674 72,85,44 #48552C
         still_have_gold = True
         while still_have_gold:
             for stat in itertools.cycle(stats_to_upgrade):
                 click_point(stat["x"], stat["y"])
                 upgrades = upgrades + 1
-                r, g, b = pyautogui.pixel(788,674)
-                if r == 72:
+                move_to(self.config.safe_pos["x"], self.config.safe_pos["y"])
+                r, g, b = pyautogui.pixel(
+                    self.config.upgrade_gold_check["x"],
+                    self.config.upgrade_gold_check["y"],
+                )
+                if r == self.config.upgrade_gold_check["r"]:
                     still_have_gold = False
                     break
         print(f"Zrobilem upgrade {upgrades} razy")
