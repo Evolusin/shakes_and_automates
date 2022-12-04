@@ -2,12 +2,9 @@ from calendar import c
 import cv2 as cv
 from settings import Settings
 from analize import (
-    click_point_right,
     needle_position,
     click_point,
-    get_needle_and_text,
-    needle_position_once,
-    refresh_site,
+    needle_position_once
 )
 import time
 import pyautogui
@@ -50,14 +47,14 @@ class States:
         if login_position:
             x, y = login_position
             click_point(x, y)
-            print("Przechodzę do quest_check")
+            print("Przechodze do quest_check")
             return "quest_check"
         else:
-            print("Jesteś już zalogowany. Przechodzę do quest_check")
+            print("Jestes juz zalogowany. Przechodze do quest_check")
             return "quest_check"
 
     def quest_check(self):
-        """Checks if char is on the mission. If yes then returns exit state.
+        """Checks if char is on the mission. If yes then returns sleep state.
         Otherwise returns do_karczmy state
 
         Returns:
@@ -68,11 +65,12 @@ class States:
         finish_quest = needle_position_once(self.config.misja_koniec)
         if quest_check:
             print("Postać jest na misji")
-            return "exit"
+            return "sleep"
         elif finish_quest:
-            print("Wykryłem skończoną misję")
+            print("Wykrylem skończoną misje")
             x, y = finish_quest
             click_point(x, y)
+            time.sleep(4)
             lvl_up = needle_position(self.config.lvl_up)
             if lvl_up:
                 lvl_up_continue = needle_position(self.config.lvl_up_continue)
@@ -83,6 +81,13 @@ class States:
                 return "do_karczmy"
         else:
             print("Nie wykryto misji")
+            time.sleep(3)
+            lvl_up = needle_position(self.config.lvl_up)
+            if lvl_up:
+                print("Wykrylem level up")
+                lvl_up_continue = needle_position(self.config.lvl_up_continue)
+                x, y = lvl_up_continue
+                click_point(x, y)
             return "do_karczmy"
 
     def do_karczmy(self):
@@ -110,15 +115,13 @@ class States:
 
     def karczma(self):
         """Clickes in order on NPC localistions. If NPC is found then
-        accepts quest and returns exit state
+        accepts quest and returns sleep state
 
         Returns:
             string: next state
         """
         print("Jestem w karczmie")
-        energy_left = self.help.energy_left()
-        print(f"Energia - {energy_left}")
-        print("Przechodzę do klikania npc od questów")
+        print("Przechodze do klikania npc od questów")
         click_point(
             self.config.karczma_questnpc1["x"],
             self.config.karczma_questnpc1["y"],
@@ -139,53 +142,36 @@ class States:
                     self.config.karczma_questnpc3["x"],
                     self.config.karczma_questnpc3["y"],
                 )
-        mount = needle_position_once(
-            self.config.quest_no_mount, self.config.quest_no_mount_sphere
-        )
+        mount = needle_position_once(self.config.quest_no_mount)
         if mount:
             print("Brak mounta!")
             self.help.buy_mount()
-        best_quest, best_quest_time = self.help.get_quests_info(debug=True)
-        print(f"Akceptuję misję nr: {best_quest}")
-        print(f"Czas jej wykonania - {best_quest_time} sekund")
-        if best_quest == 1:
-            click_point(
-                self.config.quest1_pos["x"], self.config.quest1_pos["y"]
-            )
-        elif best_quest == 2:
-            click_point(
-                self.config.quest2_pos["x"], self.config.quest2_pos["y"]
-            )
-        else:
-            click_point(
-                self.config.quest3_pos["x"], self.config.quest3_pos["y"]
-            )
+        energy_check = needle_position_once(self.config.no_eneregy)
+        if energy_check:
+            print("No energy left")
+            return "exit"
+
         click_point(
             self.config.karczma_quest["x"], self.config.karczma_quest["y"]
         )
         if self.help.full_eq_check():
             return "eq_sell"
-        print("Misja zaakceptowana. Przechodzę w tryb uśpienia")
-        self.help.mission_sleep(best_quest_time)
+        print("Misja zaakceptowana. Przechodze w tryb uspienia")
         return "quest_check"
 
     def upgrade(self):
-        wallet = self.help.get_gold()
-        print(f"Stan golda {wallet}")
-        return "exit"
+        return "sleep"
 
     def eq_sell(self):
-        print("Przechodzę do ekwipunku")
+        print("Przechodze do ekwipunku")
         click_point(
             self.config.character_menu["x"], self.config.character_menu["y"]
         )
         print("Zaczynam sprzedawać przedmioty")
         self.help.sell_equipment()
-        print("Sprzedałem wszystkie itemy")
-        print("Przechodzę do karczmy")
+        print("Sprzedalem wszystkie itemy")
+        print("Przechodze do karczmy")
         return "quest_check"
 
     def energry_status(self):
-        energy_left = self.help.energy_left()
-        print(f"Pozostała energia - {energy_left}")
-        return "exit"
+        return "sleep"
