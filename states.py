@@ -2,12 +2,9 @@ from calendar import c
 import cv2 as cv
 from settings import Settings
 from analize import (
-    click_point_right,
     needle_position,
     click_point,
-    get_needle_and_text,
-    needle_position_once,
-    refresh_site,
+    needle_position_once
 )
 import time
 import pyautogui
@@ -145,8 +142,7 @@ class States:
                     self.config.karczma_questnpc3["x"],
                     self.config.karczma_questnpc3["y"],
                 )
-        mount = needle_position_once(
-            self.config.quest_no_mount)
+        mount = needle_position_once(self.config.quest_no_mount)
         if mount:
             print("Brak mounta!")
             self.help.buy_mount()
@@ -154,7 +150,7 @@ class States:
         if energy_check:
             print("No energy left")
             return "exit"
-            
+
         click_point(
             self.config.karczma_quest["x"], self.config.karczma_quest["y"]
         )

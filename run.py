@@ -5,7 +5,7 @@ from settings import Settings
 from analize import needle_position, click_point, get_needle_and_text, needle_position_once
 from states import States
 import time
-import pyautogui
+import random
 
 
 config = Settings()
@@ -27,8 +27,9 @@ while True:
         print(config.karczma_questnpc1['y'])
         
     elif faze == "sleep":
-        print("Zasypiam na 150 sekund")
-        time.sleep(150)
+        x = random.randrange(50,150)
+        print(f"Zasypiam na {x} sekund")
+        time.sleep(x)
         faze = "logowanie"
 
     elif faze == "logowanie":
@@ -53,6 +54,10 @@ while True:
 
     elif faze == "energry_status":
         faze = states.energry_status()
+    
+    elif faze == "exit":
+        print("Exiting bot")
+        break
 
     if cv.waitKey(1) == ord("q"):
         cv.destroyAllWindows()
