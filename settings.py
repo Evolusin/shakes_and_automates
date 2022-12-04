@@ -47,6 +47,15 @@ class Settings:
             self.karczma_needle = f"{self.img_dir}karczma_linux.png"
             self.karczma_quest_accept = f"{self.img_dir}karczma_quest_accept_linux.png"
             self.quest_no_mount = f"{self.img_dir}quest_no_mount_linux.png"
+            
+            #TODO Remove false self loads
+            self.lvl_up = f"{self.img_dir}nowy_poziom.png"
+            self.lvl_up_continue = f"{self.img_dir}nowy_poziom_continue.png"
+            self.logowanie_codzienne = f"{self.img_dir}odbierz.png"
+            self.full_eq = f"{self.img_dir}full_eq.png"
+            self.character_menu = f"{self.img_dir}character_menu.png"
+            self.misja_koniec = f"{self.img_dir}misja_koniec.png"
+            self.karczma_check = f"{self.img_dir}karczma_check.png"
         # variable for x/y positions
         x = "x"
         y = "y"
