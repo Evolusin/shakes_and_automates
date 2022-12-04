@@ -15,10 +15,8 @@ time.sleep(2)
 print("Launched")
 
 while True:
-    if faze == "mouse_pos":
-        faze = states.s_mouse_pos
 
-    elif faze == "debug":
+    if faze == "debug":
         print(config.karczma_questnpc1["x"])
         print(config.karczma_questnpc1["y"])
 
@@ -55,6 +53,3 @@ while True:
         faze = states.exiting()
         break
 
-    if cv.waitKey(1) == ord("q"):
-        cv.destroyAllWindows()
-        break

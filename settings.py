@@ -1,4 +1,3 @@
-import os
 import pyautogui
 from stats_upgrade import StatsUpgrade
 
