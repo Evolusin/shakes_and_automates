@@ -24,7 +24,7 @@ while True:
         x = random.randrange(50, 150)
         print(f"Zasypiam na {x} sekund")
         time.sleep(x)
-        faze = "logowanie"
+        faze = "quest_check"
 
     elif faze == "logowanie":
         print(f"Ilosc zrobionych na ten moment questow {quest_done}")
