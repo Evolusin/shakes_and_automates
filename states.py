@@ -149,28 +149,30 @@ class States:
         if mount:
             print("Brak mounta!")
             self.help.buy_mount()
-        best_quest, best_quest_time = self.help.get_quests_info(debug=True)
-        print(f"Akceptuje misje nr: {best_quest}")
-        print(f"Czas jej wykonania - {best_quest_time} sekund")
-        if best_quest == 1:
-            click_point(
-                self.config.quest1_pos["x"], self.config.quest1_pos["y"]
-            )
-        elif best_quest == 2:
-            click_point(
-                self.config.quest2_pos["x"], self.config.quest2_pos["y"]
-            )
-        else:
-            click_point(
-                self.config.quest3_pos["x"], self.config.quest3_pos["y"]
-            )
+        # best_quest, best_quest_time = self.help.get_quests_info(debug=True)
+        # print(f"Akceptuje misje nr: {best_quest}")
+        # print(f"Czas jej wykonania - {best_quest_time} sekund")
+        # if best_quest == 1:
+        #     click_point(
+        #         self.config.quest1_pos["x"], self.config.quest1_pos["y"]
+        #     )
+        # elif best_quest == 2:
+        #     click_point(
+        #         self.config.quest2_pos["x"], self.config.quest2_pos["y"]
+        #     )
+        # else:
+        #     click_point(
+        #         self.config.quest3_pos["x"], self.config.quest3_pos["y"]
+        #     )
         click_point(
             self.config.karczma_quest["x"], self.config.karczma_quest["y"]
         )
         if self.help.full_eq_check():
             return "eq_sell"
         print("Misja zaakceptowana. Przechodze w tryb uspienia")
-        self.help.mission_sleep(best_quest_time)
+        # self.help.mission_sleep(best_quest_time)
+        # TODO Remove after pytesseract fixed
+        exit()
         return "quest_check"
 
     def upgrade(self):
