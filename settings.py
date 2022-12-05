@@ -93,7 +93,7 @@ class SettingsMain:
         return f"{self.img_dir}{template}.png"
 
 
-class SettingsLinux(Settings):
+class SettingsLinux(SettingsMain):
     def __init__(self):
         super().__init__()
         print("Wczytuje config dla Linuxa")
