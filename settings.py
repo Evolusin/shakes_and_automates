@@ -148,4 +148,5 @@ class SettingsLinux(SettingsMain):
         self.upgrade_gold_check = {x: 770, y: 689, r: 255}
 
     def load(self, template):
+        print(f"{self.img_dir}{template}_linux.png")
         return f"{self.img_dir}{template}_linux.png"
