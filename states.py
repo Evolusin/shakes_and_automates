@@ -5,7 +5,6 @@ from functions import Helper
 
 
 class States:
-    gold_ammount = 0
 
     def __init__(self) -> None:
         self.config = Settings().settings
@@ -27,6 +26,7 @@ class States:
         Returns:
             string: next state
         """
+        print(self.config.login_needle)
         login_position = needle_position_once(self.config.login_needle)
         if login_position:
             click_point(self.config.login["x"], self.config.login["y"])
