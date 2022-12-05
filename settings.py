@@ -4,7 +4,6 @@ import pyautogui
 class Settings:
     def __init__(self):
         self.img_dir = "img/"
-        self.linux = False
         self.width, self.height = pyautogui.size()
         self.monitor = {
             "top": 0,
@@ -17,21 +16,18 @@ class Settings:
         self.mount = "wolf"
 
         # templates
-        if not self.linux:
-            self.login_needle = f"{self.img_dir}login.png"
-            self.karczma_needle = f"{self.img_dir}karczma.png"
-            self.karczma_check = f"{self.img_dir}karczma_check.png"
-            self.karczma_quest_accept = (
-                f"{self.img_dir}karczma_quest_accept.png"
-            )
-            self.quest_check = f"{self.img_dir}na_misji.png"
-            self.misja_koniec = f"{self.img_dir}misja_koniec.png"
-            self.lvl_up = f"{self.img_dir}nowy_poziom.png"
-            self.lvl_up_continue = f"{self.img_dir}nowy_poziom_continue.png"
-            self.logowanie_codzienne = f"{self.img_dir}odbierz.png"
-            self.full_eq = f"{self.img_dir}full_eq.png"
-            self.quest_no_mount = f"{self.img_dir}quest_no_mount.png"
-            self.no_eneregy = f"{self.img_dir}no_energy.png"
+        self.login_needle = self.load("login")
+        self.karczma_needle = self.load("karczma")
+        self.karczma_check = self.load("karczma_check")
+        self.karczma_quest_accept = self.load("karczma_quest_accept")
+        self.quest_check = self.load("na_misji")
+        self.misja_koniec = self.load("misja_koniec")
+        self.lvl_up = self.load("nowy_poziom")
+        self.lvl_up_continue = self.load("nowy_poziom_continue")
+        self.logowanie_codzienne = self.load("odbierz")
+        self.full_eq = self.load("full_eq")
+        self.quest_no_mount = self.load("quest_no_mount")
+        self.no_eneregy = self.load("no_energy")
         # variable for x/y positions
         x = "x"
         y = "y"
@@ -41,9 +37,9 @@ class Settings:
         self.safe_pos = {x: 100, y: 100}
         # static positions for mouse click
         # middle npc
-        self.karczma_questnpc1 = {x: self.width / 1.91, y: self.height / 1.5}
+        self.karczma_questnpc1 = {x: 1005, y: self.height / 1.5}
         # right npc
-        self.karczma_questnpc2 = {x: self.width / 1.35, y: self.height / 1.35}
+        self.karczma_questnpc2 = {x: 1422, y: self.height / 1.35}
         # left npc
         self.karczma_questnpc3 = {x: self.width / 2.36, y: self.height / 1.42}
         # mission confirm
@@ -82,4 +78,7 @@ class Settings:
         self.constitution = {x: 1081, y: 669}
 
         # upgrade check gold pos and color for empty pocket
-        self.upgrade_gold_check = {x: 788, y: 674, r:72}
+        self.upgrade_gold_check = {x: 788, y: 674, r: 72}
+
+    def load(self, template):
+        return self.load("{template}")
