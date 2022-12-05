@@ -5,7 +5,7 @@ import time
 import random
 
 
-config = Settings()
+config = Settings().settings
 states = States()
 faze = config.state
 quest_done = 0

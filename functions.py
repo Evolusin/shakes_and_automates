@@ -15,7 +15,7 @@ import pyautogui
 
 class Helper:
     def __init__(self) -> None:
-        self.config = Settings()
+        self.config = Settings().settings
         pass
 
     def buy_mount(self):
@@ -93,7 +93,7 @@ class Helper:
                     self.config.upgrade_gold_check["x"],
                     self.config.upgrade_gold_check["y"],
                 )
-                if r == self.config.upgrade_gold_check["r"]:
+                if r != self.config.upgrade_gold_check["r"]:
                     still_have_gold = False
                     break
         print(f"Zrobilem upgrade {upgrades} razy")

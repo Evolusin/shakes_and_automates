@@ -4,5 +4,7 @@ import sys
 
 sys.platform = '_'
 
+# pyautogui.mouseInfo()
 
-pyautogui.mouseInfo()
+r,g,b = pyautogui.pixel(788, 674)
+print(r)

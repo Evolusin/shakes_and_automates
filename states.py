@@ -8,7 +8,7 @@ class States:
     gold_ammount = 0
 
     def __init__(self) -> None:
-        self.config = Settings()
+        self.config = Settings().settings
         self.help = Helper()
         pass
 

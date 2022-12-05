@@ -8,7 +8,7 @@ import os
 import pyautogui
 import time
 
-config = Settings()
+config = Settings().settings
 
 
 def needle_position(img_needle):
