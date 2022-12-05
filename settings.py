@@ -12,7 +12,7 @@ class Settings:
             "height": self.height,
         }
         self.state = "logowanie"
-        # wolf / raptor / dragon
+        # wolf / raptor / dragon mount
         self.mount = "wolf"
 
         # templates
@@ -28,7 +28,8 @@ class Settings:
         self.full_eq = self.load("full_eq")
         self.quest_no_mount = self.load("quest_no_mount")
         self.no_eneregy = self.load("no_energy")
-        # variable for x/y positions
+
+        # variables for x/y positions and r - red (from RGB)
         x = "x"
         y = "y"
         r = "r"
@@ -82,3 +83,8 @@ class Settings:
 
     def load(self, template):
         return f"{self.img_dir}{template}.png"
+
+
+class SettingsLinux(Settings):
+    def load(self, template):
+        return f"{self.img_dir}{template}_linux.png"
