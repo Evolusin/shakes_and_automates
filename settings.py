@@ -81,4 +81,4 @@ class Settings:
         self.upgrade_gold_check = {x: 788, y: 674, r: 72}
 
     def load(self, template):
-        return self.load("{template}")
+        return f"{self.img_dir}{template}.png"
