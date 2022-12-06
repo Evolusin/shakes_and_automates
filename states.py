@@ -50,7 +50,7 @@ class States:
             print("Postac jest na misji")
             return "sleep"
         elif finish_quest:
-            print("Wykrylem skończona misje")
+            print("Wykrylem skonczona misje")
             x, y = finish_quest
             click_point(x, y)
             time.sleep(4)
