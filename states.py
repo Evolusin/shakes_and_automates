@@ -1,11 +1,15 @@
 from settings import Settings
-from analize import needle_position, click_point, needle_position_once
+from analize import (
+    needle_position,
+    click_point,
+    needle_position_once,
+    refresh_site,
+)
 import time
 from functions import Helper
 
 
 class States:
-
     def __init__(self) -> None:
         self.config = Settings().settings
         self.help = Helper()
@@ -80,6 +84,7 @@ class States:
         Returns:
             string: next state
         """
+        print("Przechodze do karczmy")
         codzienne_logowanie = needle_position_once(
             self.config.logowanie_codzienne
         )
@@ -95,6 +100,9 @@ class States:
                 x, y = karczma_position
                 click_point(x, y)
                 return "karczma"
+            else:
+                print("Zbugowalem sie. Odswiezam strone")
+                return "refresh"
 
     def karczma(self):
         """Clickes in order on NPC localistions. If NPC is found then
@@ -141,6 +149,10 @@ class States:
             return "eq_sell"
         print("Misja zaakceptowana. Przechodze w tryb uspienia")
         return "quest_check"
+
+    def refresh(self):
+        refresh_site()
+        return "logowanie"
 
     def upgrade(self):
         print("Upgrade statystyk")

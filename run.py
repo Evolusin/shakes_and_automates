@@ -32,6 +32,9 @@ while True:
 
     elif faze == "quest_check":
         faze = states.quest_check()
+    
+    elif faze == "refresh":
+        faze = states.refresh()
 
     elif faze == "do_karczmy":
         faze = states.do_karczmy()

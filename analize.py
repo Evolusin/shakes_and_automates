@@ -67,3 +67,7 @@ def click_point_right(x, y, debug=False):
     if debug:
         print(f"Klikam na {x} - {y}")
     time.sleep(1)
+    
+def refresh_site():
+    pyautogui.hotkey('ctrl', 'r')
+    time.sleep(20)
