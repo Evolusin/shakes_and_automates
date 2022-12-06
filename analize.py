@@ -3,12 +3,11 @@ from settings import Settings
 from windowcapture import get_screenshot, get_screenshot_grab
 from PIL import Image
 import cv2 as cv
-import pytesseract
 import os
 import pyautogui
 import time
 
-config = Settings()
+config = Settings().settings
 
 
 def needle_position(img_needle):

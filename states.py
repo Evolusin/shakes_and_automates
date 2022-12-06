@@ -5,10 +5,9 @@ from functions import Helper
 
 
 class States:
-    gold_ammount = 0
 
     def __init__(self) -> None:
-        self.config = Settings()
+        self.config = Settings().settings
         self.help = Helper()
         pass
 
@@ -27,6 +26,7 @@ class States:
         Returns:
             string: next state
         """
+        print(self.config.login_needle)
         login_position = needle_position_once(self.config.login_needle)
         if login_position:
             click_point(self.config.login["x"], self.config.login["y"])
@@ -47,10 +47,10 @@ class States:
         quest_check = needle_position_once(self.config.quest_check)
         finish_quest = needle_position_once(self.config.misja_koniec)
         if quest_check:
-            print("Postać jest na misji")
+            print("Postac jest na misji")
             return "sleep"
         elif finish_quest:
-            print("Wykrylem skończoną misje")
+            print("Wykrylem skonczona misje")
             x, y = finish_quest
             click_point(x, y)
             time.sleep(4)

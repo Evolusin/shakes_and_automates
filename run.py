@@ -5,13 +5,13 @@ import time
 import random
 
 
-config = Settings()
+config = Settings().settings
 states = States()
 faze = config.state
 quest_done = 0
 
 
-time.sleep(2)
+time.sleep(10)
 print("Launched")
 
 while True:
@@ -49,4 +49,3 @@ while True:
     elif faze == "exiting":
         faze = states.exiting()
         break
-

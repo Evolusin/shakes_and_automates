@@ -1,4 +1,3 @@
-from distutils.log import debug
 import cv2 as cv
 import numpy as np
 
@@ -15,7 +14,7 @@ class Vision:
         # load the image we're trying to match
         # https://docs.opencv.org/4.2.0/d4/da8/group__imgcodecs.html
         self.needle_img = cv.imread(needle_img_path, cv.IMREAD_UNCHANGED)
-
+        self.needle_img = cv.cvtColor(self.needle_img, cv.COLOR_BGR2BGRA)
         # Save the dimensions of the needle image
         self.needle_w = self.needle_img.shape[1]
         self.needle_h = self.needle_img.shape[0]
