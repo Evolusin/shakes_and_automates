@@ -47,10 +47,10 @@ class States:
         quest_check = needle_position_once(self.config.quest_check)
         finish_quest = needle_position_once(self.config.misja_koniec)
         if quest_check:
-            print("Postać jest na misji")
+            print("Postac jest na misji")
             return "sleep"
         elif finish_quest:
-            print("Wykrylem skończoną misje")
+            print("Wykrylem skończona misje")
             x, y = finish_quest
             click_point(x, y)
             time.sleep(4)
