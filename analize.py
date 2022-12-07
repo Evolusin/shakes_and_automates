@@ -46,11 +46,11 @@ def click_point(x, y, debug=False):
     x = int(x)
     y = int(y)
     pyautogui.moveTo(x, y)
-    time.sleep(0.5)
+    time.sleep(1)
     pyautogui.click(x, y, button="left")
     if debug:
         logger.info(f"Klikam na {x} - {y}")
-    time.sleep(1)
+    time.sleep(2)
 
 def move_to(x,y):
     x = int(x)
@@ -62,11 +62,11 @@ def click_point_right(x, y, debug=False):
     x = int(x)
     y = int(y)
     pyautogui.moveTo(x, y)
-    time.sleep(0.5)
+    time.sleep(2)
     pyautogui.click(x, y, button="right")
     if debug:
         logger.info(f"Klikam na {x} - {y}")
-    time.sleep(1)
+    time.sleep(2)
     
 def refresh_site():
     pyautogui.hotkey('ctrl', 'r')

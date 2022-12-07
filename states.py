@@ -56,7 +56,7 @@ class States:
             logger.info("Wykrylem skonczona misje")
             x, y = finish_quest
             click_point(x, y)
-            time.sleep(4)
+            time.sleep(7)
             lvl_up = needle_position(self.config.lvl_up)
             if lvl_up:
                 lvl_up_continue = needle_position(self.config.lvl_up_continue)
@@ -67,7 +67,7 @@ class States:
                 return "do_karczmy"
         else:
             logger.info("Nie wykryto misji")
-            time.sleep(3)
+            time.sleep(7)
             lvl_up = needle_position(self.config.lvl_up)
             if lvl_up:
                 logger.info("Wykrylem level up")
