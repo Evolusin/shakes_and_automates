@@ -1,5 +1,7 @@
 import pyautogui
 import os
+from loguru import logger
+
 
 class Settings:
     def __init__(self) -> None:
@@ -8,6 +10,7 @@ class Settings:
             self.settings = SettingsLinux()
         else:
             self.settings = SettingsMain()
+
 
 class SettingsMain:
     def __init__(self):
@@ -96,7 +99,7 @@ class SettingsMain:
 class SettingsLinux(SettingsMain):
     def __init__(self):
         super().__init__()
-        print("Wczytuje config dla Linuxa")
+        logger.info("Wczytuje config dla Linuxa")
         # variables for x/y positions and r - red (from RGB)
         x = "x"
         y = "y"
@@ -112,7 +115,7 @@ class SettingsLinux(SettingsMain):
         # mission confirm
         self.karczma_quest = {x: 1156, y: 750}
         # full eq cancel button position
-        self.full_eq_cancel_pos = {x: 1243, y: 700} 
+        self.full_eq_cancel_pos = {x: 1243, y: 700}
         # character menu
         self.character_menu = {x: 170, y: 150}
         # login main screen position
@@ -124,7 +127,7 @@ class SettingsLinux(SettingsMain):
         self.stables_raptor = {x: 1274, y: 763}
         self.stables_dragon = {x: 1521, y: 763}
         # stables - rent button
-        self.stables_rent = {x: 1451, y: 923    }
+        self.stables_rent = {x: 1451, y: 923}
 
         # items in backpack
         self.item1_pos = {x: 1204, y: 204}
@@ -148,3 +151,6 @@ class SettingsLinux(SettingsMain):
 
     def load(self, template):
         return f"{self.img_dir}{template}_linux.png"
+
+logger.level("INFO")
+logger.add("shakes.log")
