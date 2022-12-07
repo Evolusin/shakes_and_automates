@@ -20,7 +20,7 @@ class Helper:
 
     def buy_mount(self):
         mount = self.config.mount
-        print(f"Przechodzę do kupywania - {mount}")
+        print(f"Przechodze do kupywania - {mount}")
         click_point(self.config.stables["x"], self.config.stables["y"])
         # TODO - Check gold before buying
         if mount == "wolf":
@@ -67,7 +67,7 @@ class Helper:
     def full_eq_check(self):
         full_eq_check = needle_position_once(self.config.full_eq)
         if full_eq_check:
-            print("Wykryłem pełen ekwipunek!")
+            print("Wykrylem pelen ekwipunek!")
             click_point(
                 self.config.full_eq_cancel_pos["x"],
                 self.config.full_eq_cancel_pos["y"],
