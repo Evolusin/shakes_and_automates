@@ -1,5 +1,5 @@
 import cv2 as cv
-from settings import Settings
+from settings import Settings, logger
 from states import States
 import time
 import random
@@ -12,22 +12,22 @@ quest_done = 0
 
 
 time.sleep(10)
-print("Launched")
+logger.info("Launched")
 
 while True:
 
     if faze == "debug":
-        print(config.karczma_questnpc1["x"])
-        print(config.karczma_questnpc1["y"])
+        logger.info(config.karczma_questnpc1["x"])
+        logger.info(config.karczma_questnpc1["y"])
 
     elif faze == "sleep":
         x = random.randrange(50, 150)
-        print(f"Zasypiam na {x} sekund")
+        logger.info(f"Zasypiam na {x} sekund")
         time.sleep(x)
         faze = "quest_check"
 
     elif faze == "logowanie":
-        print(f"Ilosc zrobionych na ten moment questow {quest_done}")
+        logger.info(f"Ilosc zrobionych na ten moment questow {quest_done}")
         faze = states.logowanie()
 
     elif faze == "quest_check":

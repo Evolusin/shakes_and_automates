@@ -1,7 +1,7 @@
 from calendar import c
 import cv2 as cv
 import itertools
-from settings import Settings
+from settings import Settings, logger
 from analize import (
     click_point_right,
     needle_position,
@@ -20,7 +20,7 @@ class Helper:
 
     def buy_mount(self):
         mount = self.config.mount
-        print(f"Przechodze do kupywania - {mount}")
+        logger.info(f"Przechodze do kupywania - {mount}")
         click_point(self.config.stables["x"], self.config.stables["y"])
         # TODO - Check gold before buying
         if mount == "wolf":
@@ -40,7 +40,7 @@ class Helper:
         click_point(
             self.config.stables_rent["x"], self.config.stables_rent["y"]
         )
-        print("Mount kupiony!")
+        logger.info("Mount kupiony!")
         return "do_karczmy"
 
     def sell_equipment(self):
@@ -67,7 +67,7 @@ class Helper:
     def full_eq_check(self):
         full_eq_check = needle_position_once(self.config.full_eq)
         if full_eq_check:
-            print("Wykrylem pelen ekwipunek!")
+            logger.info("Wykrylem pelen ekwipunek!")
             click_point(
                 self.config.full_eq_cancel_pos["x"],
                 self.config.full_eq_cancel_pos["y"],
@@ -96,5 +96,5 @@ class Helper:
                 if r != self.config.upgrade_gold_check["r"]:
                     still_have_gold = False
                     break
-        print(f"Zrobilem upgrade {upgrades} razy")
+        logger.info(f"Zrobilem upgrade {upgrades} razy")
         return None

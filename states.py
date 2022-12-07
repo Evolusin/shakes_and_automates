@@ -1,4 +1,4 @@
-from settings import Settings
+from settings import Settings, logger
 from analize import (
     needle_position,
     click_point,
@@ -21,7 +21,7 @@ class States:
         Returns:
             string: debug
         """
-        print("Debug mode")
+        logger.info("Debug mode")
         return "debug"
 
     def logowanie(self):
@@ -30,14 +30,13 @@ class States:
         Returns:
             string: next state
         """
-        print(self.config.login_needle)
         login_position = needle_position_once(self.config.login_needle)
         if login_position:
             click_point(self.config.login["x"], self.config.login["y"])
-            print("Przechodze do quest_check")
+            logger.info("Przechodze do quest_check")
             return "quest_check"
         else:
-            print("Jestes juz zalogowany. Przechodze do quest_check")
+            logger.info("Jestes juz zalogowany. Przechodze do quest_check")
             return "quest_check"
 
     def quest_check(self):
@@ -47,14 +46,14 @@ class States:
         Returns:
             string: next state
         """
-        print("Sprawdzam czy na misji")
+        logger.info("Sprawdzam czy na misji")
         quest_check = needle_position_once(self.config.quest_check)
         finish_quest = needle_position_once(self.config.misja_koniec)
         if quest_check:
-            print("Postac jest na misji")
+            logger.info("Postac jest na misji")
             return "sleep"
         elif finish_quest:
-            print("Wykrylem skonczona misje")
+            logger.info("Wykrylem skonczona misje")
             x, y = finish_quest
             click_point(x, y)
             time.sleep(4)
@@ -67,11 +66,11 @@ class States:
             else:
                 return "do_karczmy"
         else:
-            print("Nie wykryto misji")
+            logger.info("Nie wykryto misji")
             time.sleep(3)
             lvl_up = needle_position(self.config.lvl_up)
             if lvl_up:
-                print("Wykrylem level up")
+                logger.info("Wykrylem level up")
                 lvl_up_continue = needle_position(self.config.lvl_up_continue)
                 x, y = lvl_up_continue
                 click_point(x, y)
@@ -84,7 +83,7 @@ class States:
         Returns:
             string: next state
         """
-        print("Przechodze do karczmy")
+        logger.info("Przechodze do karczmy")
         codzienne_logowanie = needle_position_once(
             self.config.logowanie_codzienne
         )
@@ -101,7 +100,7 @@ class States:
                 click_point(x, y)
                 return "karczma"
             else:
-                print("Zbugowalem sie. Odswiezam strone")
+                logger.warning("Zbugowalem sie. Odswiezam strone")
                 return "refresh"
 
     def karczma(self):
@@ -111,8 +110,8 @@ class States:
         Returns:
             string: next state
         """
-        print("Jestem w karczmie")
-        print("Przechodze do klikania npc od questów")
+        logger.info("Jestem w karczmie")
+        logger.info("Przechodze do klikania npc od questów")
         click_point(
             self.config.karczma_questnpc1["x"],
             self.config.karczma_questnpc1["y"],
@@ -135,11 +134,11 @@ class States:
                 )
         mount = needle_position_once(self.config.quest_no_mount)
         if mount:
-            print("Brak mounta!")
+            logger.info("Brak mounta!")
             self.help.buy_mount()
         energy_check = needle_position_once(self.config.no_eneregy)
         if energy_check:
-            print("No energy left")
+            logger.info("No energy left")
             return "upgrade"
 
         click_point(
@@ -147,7 +146,7 @@ class States:
         )
         if self.help.full_eq_check():
             return "eq_sell"
-        print("Misja zaakceptowana. Przechodze w tryb uspienia")
+        logger.info("Misja zaakceptowana. Przechodze w tryb uspienia")
         return "quest_check"
 
     def refresh(self):
@@ -155,7 +154,7 @@ class States:
         return "logowanie"
 
     def upgrade(self):
-        print("Upgrade statystyk")
+        logger.info("Upgrade statystyk")
         click_point(
             self.config.character_menu["x"], self.config.character_menu["y"]
         )
@@ -163,16 +162,16 @@ class States:
         return "exiting"
 
     def exiting(self):
-        print("Wylaczam bota")
+        logger.info("Wylaczam bota")
         return None
 
     def eq_sell(self):
-        print("Przechodze do ekwipunku")
+        logger.info("Przechodze do ekwipunku")
         click_point(
             self.config.character_menu["x"], self.config.character_menu["y"]
         )
-        print("Zaczynam sprzedawac przedmioty")
+        logger.info("Zaczynam sprzedawac przedmioty")
         self.help.sell_equipment()
-        print("Sprzedalem wszystkie itemy")
-        print("Przechodze do karczmy")
+        logger.info("Sprzedalem wszystkie itemy")
+        logger.info("Przechodze do karczmy")
         return "quest_check"

@@ -1,5 +1,5 @@
 from vision import Vision
-from settings import Settings
+from settings import Settings, logger
 from windowcapture import get_screenshot, get_screenshot_grab
 from PIL import Image
 import cv2 as cv
@@ -49,7 +49,7 @@ def click_point(x, y, debug=False):
     time.sleep(0.5)
     pyautogui.click(x, y, button="left")
     if debug:
-        print(f"Klikam na {x} - {y}")
+        logger.info(f"Klikam na {x} - {y}")
     time.sleep(1)
 
 def move_to(x,y):
@@ -65,7 +65,7 @@ def click_point_right(x, y, debug=False):
     time.sleep(0.5)
     pyautogui.click(x, y, button="right")
     if debug:
-        print(f"Klikam na {x} - {y}")
+        logger.info(f"Klikam na {x} - {y}")
     time.sleep(1)
     
 def refresh_site():
