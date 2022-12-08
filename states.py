@@ -147,7 +147,7 @@ class States:
         if self.help.full_eq_check():
             return "eq_sell"
         logger.info("Misja zaakceptowana. Przechodze w tryb uspienia")
-        return "quest_check"
+        return "sleep"
 
     def refresh(self):
         refresh_site()
