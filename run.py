@@ -11,7 +11,7 @@ faze = config.state
 quest_done = 0
 
 
-time.sleep(10)
+time.sleep(25)
 logger.info("Launched")
 
 while True:
