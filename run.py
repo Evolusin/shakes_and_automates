@@ -9,6 +9,7 @@ config = Settings().settings
 states = States()
 faze = config.state
 quest_done = 0
+bug_times = 0
 
 
 time.sleep(25)
@@ -34,8 +35,12 @@ while True:
         faze = states.quest_check()
     
     elif faze == "refresh":
-        faze = states.refresh()
-
+        bug_times=bug_times+1
+        if bug_times < 10:
+            faze = states.refresh()
+        else:
+            faze = "exiting"
+            
     elif faze == "do_karczmy":
         faze = states.do_karczmy()
 

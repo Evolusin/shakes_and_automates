@@ -100,8 +100,8 @@ class States:
                 click_point(x, y)
                 return "karczma"
             else:
-                logger.warning("Zbugowalem sie. Odswiezam strone")
-                return "refresh"
+                logger.warning("Zbugowalem sie. Przechodze do logowania")
+                return "logowanie"
 
     def karczma(self):
         """Clickes in order on NPC localistions. If NPC is found then
