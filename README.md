@@ -22,6 +22,9 @@
 <br/>
 <br/>
 
+## PROJECT IS NOT LONGER DEVELOPED
+  Feel free to use this code to learn more about OpenCV 
+
 ## About The Project
 
 Shakes & Automates is Python a bot designed to automatically play the Shakes & Fidget browser game by using only Computer Vision. The bot is currently in early alpha
